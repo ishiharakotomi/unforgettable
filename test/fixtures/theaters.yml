@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  theater_name: MyString
+  theater_image: MyText
+  postalcode: MyString
+  address: MyString
+  phonenumber: MyString
+  introduction: MyString
+  theater_id: 1
+  user_id: 1
+  title: MyString
+  body: MyString
+  review_image: MyText
+  review_type: 1
+
+two:
+  theater_name: MyString
+  theater_image: MyText
+  postalcode: MyString
+  address: MyString
+  phonenumber: MyString
+  introduction: MyString
+  theater_id: 1
+  user_id: 1
+  title: MyString
+  body: MyString
+  review_image: MyText
+  review_type: 1
