@@ -2,7 +2,7 @@ class CreateTheaters < ActiveRecord::Migration[5.2]
   def change
     create_table :theaters do |t|
       t.string :theater_name
-      t.text :theater_image
+      t.text :theater_image_id
       t.string :postalcode
       t.string :address
       t.string :phonenumber

@@ -1,0 +1,18 @@
+<%= link_to "劇場追加", new_admins_theater_path %> |
+<%= link_to "LOG OUT", destroy_admin_session_path, method: :delete %>
+<br>
+<% @theaters.each do |theater|%>
+
+  <%= link_to admins_theater_path(theater) do %>
+    <%= attachment_image_tag theater, :theater_image, fallback: "noimage.jpg" %>
+    <p><%= theater.theater_name %></p>
+  <% end %>
+    <p><%= theater.introduction %></p>
+    <p><%= theater.postcode %></p>
+    <p><%= theater.prefecture_code %></p>
+    <p><%= theater.address_city %></p>
+    <p><%= theater.address_street %></p>
+    <p><%= theater.address_building %></p>
+    <p><%= theater.phonenumber %></p>
+
+<% end %>
