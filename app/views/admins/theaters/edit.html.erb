@@ -1,6 +1,7 @@
 <div class="container">
 
   <h1>劇場編集</h1>
+  <h3><%= link_to "削除", admins_theater_path(@theater), method: :delete,  data: {confirm: "本当に削除しますか？"} %>
 
   <%= form_for [:admins, @theater] do |f| %>
 
