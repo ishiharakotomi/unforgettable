@@ -10,7 +10,7 @@ class CreateInquiries < ActiveRecord::Migration[5.2]
       t.string :phonenumber
       t.string :postalcode
       t.string :address
-      t.text :theater_image
+      t.text :theater_image_id
 
       t.timestamps
     end

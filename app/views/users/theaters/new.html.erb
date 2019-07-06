@@ -1,0 +1,27 @@
+<div class="container">
+
+  <%= form_for @(theater) do |f| %>
+
+    <h1>劇場追加</h1>
+
+      <h3>画像追加</h3>
+      <%= f.attachment_field :therter_image %>
+
+      <h3>劇場名追加</h3>
+      <%= f.text_field :theater_name %>
+
+      <h3>劇場紹介</h3>
+      <%= f.text_area :theater_introduction %>
+
+      <h3>郵便番号</h3>
+      <%= f.text_field :postalcode %>
+
+      <h3>住所</h3>
+      <%= f.text_area :address %>
+
+      <h3>電話番号</h3>
+      <%= f.text_field :phonenumber %>
+
+     <%= f.submit '掲載' %>
+
+</div>
