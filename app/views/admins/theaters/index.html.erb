@@ -5,14 +5,14 @@
 
   <%= link_to admins_theater_path(theater) do %>
     <%= attachment_image_tag theater, :theater_image, fallback: "noimage.jpg" %>
-    <p><%= theater.theater_name %></p>
+    <p> 劇場名： <%= theater.theater_name %></p>
   <% end %>
-    <p><%= theater.introduction %></p>
-    <p><%= theater.postcode %></p>
-    <p><%= theater.prefecture_code %></p>
-    <p><%= theater.address_city %></p>
-    <p><%= theater.address_street %></p>
-    <p><%= theater.address_building %></p>
-    <p><%= theater.phonenumber %></p>
+    <p> 劇場紹介： <%= theater.introduction %></p>
+    <p> 郵便番号： <%= theater.postcode %></p>
+    <p> 都道府県： <%= theater.prefecture_code %></p>
+    <p> 市区： <%= theater.address_city %></p>
+    <p> 町村： <%= theater.address_street %></p>
+    <p> 建物名： <%= theater.address_building %></p>
+    <p> 電話番号： <%= theater.phonenumber %></p>
 
 <% end %>
