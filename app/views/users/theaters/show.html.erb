@@ -1,1 +1,14 @@
-show.html.erb
+<h1>劇場詳細</h1>
+
+<h3><%= link_to "劇場編集", edit_admins_theater_path %></h3>
+<h3><%= link_to "削除", admins_theater_path(@theater), method: :delete,  data: {confirm: "本当に削除しますか？"} %>
+
+    <%= attachment_image_tag @theater, :theater_image, fallback: "noimage.jpg" %>
+    <p> 劇場名： <%= @theater.theater_name %></p>
+    <p> 劇場紹介： <%= @theater.introduction %></p>
+    <p> 郵便番号： <%= @theater.postcode %></p>
+    <p> 都道府県： <%= @theater.prefecture_code %></p>
+    <p> 市区： <%= @theater.address_city %></p>
+    <p> 町村： <%= @theater.address_street %></p>
+    <p> 建物名： <%= @theater.address_building %></p>
+    <p> 電話番号： <%= @theater.phonenumber %></p>
