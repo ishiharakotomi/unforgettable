@@ -7,8 +7,76 @@
     <p> 劇場名： <%= @theater.theater_name %></p>
     <p> 劇場紹介： <%= @theater.introduction %></p>
     <p> 郵便番号： <%= @theater.postcode %></p>
-    <p> 都道府県： <%= @theater.prefecture_code %></p>
+    <p> 都道府県： <%= @theater.prefecture_name %></p>
     <p> 市区： <%= @theater.address_city %></p>
     <p> 町村： <%= @theater.address_street %></p>
     <p> 建物名： <%= @theater.address_building %></p>
     <p> 電話番号： <%= @theater.phonenumber %></p>
+
+<h2>コメント一覧</h2>
+
+<div class='tabs'>
+  <div class='tab-buttons'>
+    <span class='content1'>review</span>
+    <span class='content2'>osusume</span>
+      <div id='lamp' class='content1'></div>
+  </div>
+        <div class='tab-content'>
+
+          <div class='content1'>
+            <% @reviews.each do |r| %>
+                <p> ニックネーム： <%= r.user.nickname %></p>
+                <p> 題目： <%= r.title %></p>
+                <p> 内容： <%= r.body %></p>
+                <%= attachment_image_tag (r), :review_image %>
+                  <p><%= link_to '削除', method: :delete %></p>
+            <% end %>
+
+            <%= form_for [@theater, @review], url:{controller:'reviews', action:'create'} do |f| %>
+              <%= f.attachment_field :review_image %>
+              <p> 題目：<%= f.text_field :title %></p>
+              <p> 内容：<%= f.text_area :body %></p>
+              <%= f.hidden_field :theater_id, value: params[:id] %>
+              <%= f.hidden_field :review_type, value: 0 %>
+
+              <%= f.submit 'review' %>
+            <% end %>
+          </div>
+
+          <div class="content2">
+            <% @shops.each do |s| %>
+              <p> ニックネーム： <%= s.user.nickname %></p>
+              <p> 題目： <%= s.title %></p>
+              <p> 内容： <%= s.body %></p>
+              <%= attachment_image_tag (s), :review_image %>
+                <p><%= link_to '削除', method: :delete %></p>
+            <% end %>
+
+            <%= form_for [@theater, @review], url:{controller:'reviews', action:'create'} do |f| %>
+              <%= f.attachment_field :review_image %>
+              <p> 題目：<%= f.text_field :title %></p>
+              <p> 内容：<%= f.text_area :body %></p>
+              <%= f.hidden_field :theater_id, value: params[:id] %>
+              <%= f.hidden_field :review_type, value: 1 %>
+
+              <%= f.submit 'osusume' %>
+            <% end %>
+          </div>
+        </div>
+
+<script>
+$('.tab-content>div').hide();
+$('.tab-content>div').first().slideDown();
+  $('.tab-buttons span').click(function(){
+    var thisclass=$(this).attr('class');
+    $('#lamp').removeClass().addClass('#lamp').addClass(thisclass);
+    $('.tab-content>div').each(function(){
+      if($(this).hasClass(thisclass)){
+        $(this).fadeIn(800);
+      }
+      else{
+        $(this).hide();
+      }
+    });
+  });
+</script>

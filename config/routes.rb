@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   	get "search_users" => "users#search", as:'search_users'
   	resources :theaters
   	resources :users,      only:[:index, :show, :edit, :update, :destroy]
-  	resources :reviews,    only:[:update, :destroy]
+  	resources :reviews,    only:[:new, :edit, :create, :update, :destroy]
 
   end
 

@@ -8,6 +8,9 @@ before_action :authenticate_admin!, only: [:index, :show, :new, :edit, :update, 
 
     def show
     	@theater = Theater.find(params[:id])
+    	@reviews = @theater.reviews.where(review_type: 0)
+        @review = Review.new
+        @shops = @theater.reviews.where(review_type: 1)
     end
 
 	def new
