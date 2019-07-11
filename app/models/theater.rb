@@ -1,5 +1,8 @@
 class Theater < ApplicationRecord
-	attachment :theater_image
+
+  has_many :reviews, dependent: :destroy
+
+  attachment :theater_image
 
   include JpPrefecture
   jp_prefecture :prefecture_code
@@ -11,4 +14,6 @@ class Theater < ApplicationRecord
   def prefecture_name=(prefecture_name)
       self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
+
+
 end

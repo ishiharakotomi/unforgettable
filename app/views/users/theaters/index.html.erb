@@ -3,7 +3,7 @@
 <br>
 <% @theaters.each do |theater|%>
 
-  <%= link_to admins_theater_path(theater) do %>
+  <%= link_to users_theater_path(theater) do %>
     <%= attachment_image_tag theater, :theater_image, fallback: "noimage.jpg" %>
     <p> 劇場名： <%= theater.theater_name %></p>
   <% end %>
