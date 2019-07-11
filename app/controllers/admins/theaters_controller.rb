@@ -26,7 +26,7 @@ before_action :authenticate_admin!, only: [:index, :show, :new, :edit, :update, 
 
 	def create
 		@theater = Theater.new(theater_params)
-		theater.save
+		@theater.save
 		redirect_to admins_theaters_path
 	end
 
@@ -38,6 +38,6 @@ before_action :authenticate_admin!, only: [:index, :show, :new, :edit, :update, 
 
 	private
 	def theater_params
-		params.require(:theater).permit(:theater_image, :theater_name, :introduction, :postcode, :prefecture_name, :address_city, :address_street, :address_building, :phonenumber)
+		params.require(:theater).permit(:theater_image, :theater_name, :introduction, :postcode, :prefecture_name, :prefecture_code, :address_city, :address_street, :address_building, :phonenumber)
 	end
 end
