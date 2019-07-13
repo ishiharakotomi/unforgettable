@@ -5,11 +5,84 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <%= yield %>
+
+<div class="wrapper">
+  <div class="menu-trigger" href="">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav>
+    <ul class="menu">
+        <% if admin_signed_in? %>
+          <il class="menu-item"><%= link_to "劇場追加", new_admins_theater_path %></il>
+          <il class="menu-item"><%= link_to "会員リスト" %></il>
+          <il class="menu-item">
+            <%#= form_tag admin_search_items_path, :method => 'get' do %>
+              <%#= text_field_tag :search, "", size: "40",placeholder: "劇場名" %>
+              <%#= submit_tag "Search", :name => nil %>
+            <%# end %>
+          </il>
+          <il class="menu-item"><%= link_to "log out", destroy_admin_session_path, method: :delete %></il>
+
+        <% elsif user_signed_in? %>
+          <il class="menu-item"><%= current_user.nickname + "さん" %></il>
+          <il class="menu-item"><%= link_to "my page", users_user_path(current_user) %></il>
+          <il class="menu-item">
+            <%#= form_tag search_items_path, :method => 'get' do %>
+              <%#= text_field_tag :search, params[:search], size: "40",placeholder: "劇場名"  %>
+              <%#= submit_tag "Search", :name => nil %>
+            <%# end %>
+          </il>
+          <il class="menu-item"><%= link_to "contact" %></il>
+          <il class="menu-item"><%= link_to "log out", destroy_admin_session_path, method: :delete %></il>
+
+        <% else %>
+          <il class="menu-item"><%= link_to "log in", new_user_session_path %></il>
+          <il class="menu-item"><%= link_to "sign up", new_user_registration_path %></il>
+          <il class="menu-item">
+            <%#= form_tag search_items_path, :method => 'get' do %>
+              <%#= text_field_tag :search, params[:search], size: "40",placeholder: "劇場名" %>
+              <%#= submit_tag "Search", :name => nil %>
+            <%# end %>
+            </il>
+          <il class="menu-item"><%= link_to "contact" %></il>
+          <% end %>
+    </ul>
+  </nav>
+    <div class="overlay"></div>
+</div>
+            <%= yield %>
   </body>
 </html>
+
+<script>
+$('.menu-trigger').on('click',function(){
+
+    if($(this).hasClass('active')){
+      $(this).removeClass('active');
+      $('main').removeClass('open');
+      $('nav').removeClass('open');
+      $('.overlay').removeClass('open');
+    } else {
+      $(this).addClass('active');
+      $('main').addClass('open');
+      $('nav').addClass('open');
+      $('.overlay').addClass('open');
+    }
+  });
+  $('.overlay').on('click',function(){
+    if($(this).hasClass('open')){
+      $(this).removeClass('open');
+      $('.menu-trigger').removeClass('active');
+      $('main').removeClass('open');
+      $('nav').removeClass('open');
+    }
+  });
+  </script>
