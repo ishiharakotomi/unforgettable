@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_13_051753) do
+ActiveRecord::Schema.define(version: 2019_07_14_061421) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,27 +24,18 @@ ActiveRecord::Schema.define(version: 2019_07_13_051753) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "inquiries", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "inquiry_contents"
-    t.string "theater_name"
-    t.string "theater_name_kana"
-    t.string "person_in_charge"
+  create_table "contacts", force: :cascade do |t|
     t.string "email"
-    t.string "phonenumber"
-    t.string "postalcode"
-    t.string "address"
-    t.text "theater_image_id"
+    t.text "message"
+    t.string "contact_type：integer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "inquiry_replies", force: :cascade do |t|
-    t.integer "inquiry_id"
-    t.integer "admin_id"
-    t.string "reply_content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "contact_type"
+    t.string "inquiry"
+    t.string "request"
+    t.string "nickname"
+    t.string "name"
+    t.string "name_kana"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -97,6 +88,8 @@ ActiveRecord::Schema.define(version: 2019_07_13_051753) do
     t.datetime "updated_at", null: false
     t.string "nickname"
     t.string "profile_image_id"
+    t.string "name"
+    t.string "name_kana"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

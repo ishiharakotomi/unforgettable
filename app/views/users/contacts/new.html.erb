@@ -1,0 +1,40 @@
+<h1>お問い合わせフォーム</h1>
+
+<div class="inquiry">
+  <%= form_for @contact do |c| %>
+    <p> ニックネーム：</p><%= c.text_field :nickname %>
+    <p> 氏名：<%= c.text_field :name %></p>
+    <p> カナ：<%= c.text_field :name_kana %></p>
+    <p> 内容：<%= c.text_area :body %></p>
+    <%= c.hidden_field :contact_type, value: 0 %>
+    <%= c.submit '入力確認画面へ進む' %>
+  <% end %>
+</div>
+
+<div class="request">
+  <%= form_for @contact do |c| %>
+    <p> ニックネーム：<%= c.text_field :nickname %></p>
+    <p> 氏名：<%= c.text_field :name %></p>
+    <p> カナ：<%= c.text_field :name_kana %></p>
+    <p> 内容：<%= c.text_area :body %></p>
+    <%= c.hidden_field :contact_type, value: 1 %>
+    <%= c.submit '入力確認画面へ進む' %>
+  <% end %>
+</div>
+
+<script>
+$('.tab-content>div').hide();
+$('.tab-content>div').first().slideDown();
+  $('.tab-buttons span').click(function(){
+    var thisclass=$(this).attr('class');
+    $('#lamp').removeClass().addClass('#lamp').addClass(thisclass);
+    $('.tab-content>div').each(function(){
+      if($(this).hasClass(thisclass)){
+        $(this).fadeIn(800);
+      }
+      else{
+        $(this).hide();
+      }
+    });
+  });
+</script>
