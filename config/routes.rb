@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :users do
+    get 'contacts/new'
+    get 'contacts/create'
+  end
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',
     passwords: 'admins/passwords',
@@ -28,10 +32,11 @@ Rails.application.routes.draw do
   	get "search_users" => "users#search", as:'search_users'
   	resources :theaters,   only:[:show, :index]
   	resources :reviews,    only:[:new, :edit, :create, :update]
-  	resources :inquiries,  only:[:new]
   	resources :users,      only:[:show, :edit, :update, :destroy]
   	resource  :likes,      only:[:create, :destroy]
 
   end
       root "users/theaters#index"
+      resources :contacts,   only:[:new, :create]
+
 end
