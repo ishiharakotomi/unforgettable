@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_14_061421) do
+ActiveRecord::Schema.define(version: 2019_07_15_101646) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 2019_07_14_061421) do
     t.string "name_kana"
   end
 
-  create_table "likes", force: :cascade do |t|
-    t.integer "theater_id"
+  create_table "reviewlikes", force: :cascade do |t|
+    t.integer "review_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -54,6 +54,23 @@ ActiveRecord::Schema.define(version: 2019_07_14_061421) do
     t.integer "review_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
+  create_table "spendlikes", force: :cascade do |t|
+    t.integer "spend_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "review_id"
+  end
+
+  create_table "theaterlikes", force: :cascade do |t|
+    t.integer "theater_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "review_id"
   end
 
   create_table "theaters", force: :cascade do |t|
