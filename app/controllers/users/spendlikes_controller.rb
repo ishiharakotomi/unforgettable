@@ -8,7 +8,6 @@ class Users::SpendlikesController < ApplicationController
     end
 
     def destroy
-    	byebug
     	spendlike = Spendlike.find(params[:id])
     	theater = spendlike.review.theater
         spendlike.destroy

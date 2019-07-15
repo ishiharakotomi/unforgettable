@@ -42,17 +42,16 @@
                 <p> 内容： <%= review.body %></p>
                 <%= attachment_image_tag (review), :review_image %>
 
-                <% if review.liked_by?(current_user) %>
+                <% if review.review_liked_by?(current_user) %>
                   <%= link_to users_review_reviewlikes_path(review), method: :delete do %>
                     <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
-                    <%= review.reviewlikes.count %>
                   <% end %>
                 <% else %>
                   <%= link_to users_review_reviewlikes_path(review), method: :post do %>
                     <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
-                    <%= review.reviewlikes.count %>
                   <% end %>
                 <% end %>
+                <%= review.reviewlikes.count %>
 
                 <% if user_signed_in? && review.user == current_user %>
                   <p><%= link_to '削除', users_review_path(review), method: :delete %></p>
@@ -80,9 +79,9 @@
                 <p><%= link_to '削除', users_review_path(review), method: :delete %></p>
               <% end %>
 
-              <% if review.liked_by?(current_user) %>
+              <% if review.spend_liked_by?(current_user) %>
               <% spendlike=review.spendlikes.find_by(user_id: current_user.id) %>
-                <%= link_to users_review_spendlike_path(spendlike), method: :delete do %>
+                <%= link_to users_review_spendlike_path(review.id, spendlike.id), method: :delete do %>
                   <i class="fa fa-heart" aria-hidden="true" style="color: red; "></i>
                 <% end %>
               <% else %>
@@ -90,6 +89,7 @@
                   <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
                 <% end %>
               <% end %>
+                <%= review.spendlikes.count %>
             <% end %>
 
             <%= form_for [@theater, @review], url:{controller:'reviews', action:'create'} do |f| %>

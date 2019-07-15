@@ -7,11 +7,11 @@ class Review < ApplicationRecord
 	attachment :review_image
 
 
-	def liked_by?(user)
+	def review_liked_by?(user)
         reviewlikes.where(user_id: user.id).exists?
+    end
+
+    def spend_liked_by?(user)
         spendlikes.where(user_id: user.id).exists?
     end
-    # def liked_by?(user)
-    # 	spendlikes.where(user_id: user.id).exists?
-    # end
 end
