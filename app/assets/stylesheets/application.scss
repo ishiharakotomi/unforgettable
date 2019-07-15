@@ -13,12 +13,14 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
-/*section {
-  background: #E4E4E6;
-  padding: 6rem 3rem;
+* {
   margin: 0;
-}*/
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .wrapper {
   height: 100%;
@@ -118,7 +120,7 @@ nav {
   width: 250px;
   height: 100%;
   padding-top: 100px;
-  background-color: rgb(16, 69, 153, 0.8);
+  background-color: rgba(16, 69, 153, 0.8);
   position: fixed;
   top: 0;
   right: 0;

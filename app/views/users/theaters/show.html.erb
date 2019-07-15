@@ -13,6 +13,18 @@
     <p> 建物名：<%= @theater.address_building %></p>
     <p> 電話番号：<%= @theater.phonenumber %></p>
 
+<% if @theater.liked_by?(current_user) %>
+    <%= link_to users_theater_theaterlikes_path(@theater), method: :delete do %>
+      <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
+      <%= @theater.theaterlikes.count %>
+    <% end %>
+<% else %>
+    <%= link_to users_theater_theaterlikes_path(@theater.id), method: :post do %>
+      <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
+      <%= @theater.theaterlikes.count %>
+    <% end %>
+<% end %>
+
 <h2>コメント一覧</h2>
 
 <div class='tabs'>
@@ -24,14 +36,26 @@
         <div class='tab-content'>
 
           <div class='content1'>
-            <% @reviews.each do |r| %>
-                <p> ニックネーム： <%= r.user.nickname %></p>
-                <p> 題目： <%= r.title %></p>
-                <p> 内容： <%= r.body %></p>
-                <%= attachment_image_tag (r), :review_image %>
+            <% @reviews.each do |review| %>
+                <p> ニックネーム： <%= review.user.nickname %></p>
+                <p> 題目： <%= review.title %></p>
+                <p> 内容： <%= review.body %></p>
+                <%= attachment_image_tag (review), :review_image %>
 
-                <% if user_signed_in? && r.user == current_user %>
-                  <p><%= link_to '削除', users_review_path(r), method: :delete %></p>
+                <% if review.liked_by?(current_user) %>
+                  <%= link_to users_review_reviewlikes_path(review), method: :delete do %>
+                    <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
+                    <%= review.reviewlikes.count %>
+                  <% end %>
+                <% else %>
+                  <%= link_to users_review_reviewlikes_path(review), method: :post do %>
+                    <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
+                    <%= review.reviewlikes.count %>
+                  <% end %>
+                <% end %>
+
+                <% if user_signed_in? && review.user == current_user %>
+                  <p><%= link_to '削除', users_review_path(review), method: :delete %></p>
                 <% end %>
             <% end %>
 
@@ -47,13 +71,24 @@
           </div>
 
           <div class="content2">
-            <% @shops.each do |s| %>
-              <p> ニックネーム： <%= s.user.nickname %></p>
-              <p> 題目： <%= s.title %></p>
-              <p> 内容： <%= s.body %></p>
-              <%= attachment_image_tag (s), :review_image %>
-              <% if user_signed_in? && s.user == current_user %>
-                <p><%= link_to '削除', users_review_path(s), method: :delete %></p>
+            <% @reviews.each do |review| %>
+              <p> ニックネーム： <%= review.user.nickname %></p>
+              <p> 題目： <%= review.title %></p>
+              <p> 内容： <%= review.body %></p>
+              <%= attachment_image_tag (review), :review_image %>
+              <% if user_signed_in? && review.user == current_user %>
+                <p><%= link_to '削除', users_review_path(review), method: :delete %></p>
+              <% end %>
+
+              <% if review.liked_by?(current_user) %>
+              <% spendlike=review.spendlikes.find_by(user_id: current_user.id) %>
+                <%= link_to users_review_spendlike_path(spendlike), method: :delete do %>
+                  <i class="fa fa-heart" aria-hidden="true" style="color: red; "></i>
+                <% end %>
+              <% else %>
+                <%= link_to users_review_spendlikes_path(review.id), method: :post do %>
+                  <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
+                <% end %>
               <% end %>
             <% end %>
 

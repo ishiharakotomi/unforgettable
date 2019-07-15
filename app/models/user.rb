@@ -5,4 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :reviews, dependent: :destroy
 
+  attachment :profile_image
+
+  has_many :theaterlikes
+  has_many :reviewlikes
+  has_many :spendlikes
+
 end

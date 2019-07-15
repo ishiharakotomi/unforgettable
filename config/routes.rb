@@ -22,18 +22,22 @@ Rails.application.routes.draw do
   	get "search_theaters" => "theaters#search", as:'search_theater'
   	get "search_users" => "users#search", as:'search_users'
   	resources :theaters
-  	resources :users,      only:[:index, :show, :edit, :update, :destroy]
-  	resources :reviews,    only:[:new, :edit, :create, :update, :destroy]
+  	resources :users,        only:[:index, :show, :edit, :update, :destroy]
+  	resources :reviews,      only:[:new, :edit, :create, :update, :destroy]
 
   end
 
   namespace :users do
   	get "search_theaters" => "theaters#search", as:'search_theater'
   	get "search_users" => "users#search", as:'search_users'
-  	resources :theaters,   only:[:show, :index]
-  	resources :reviews,    only:[:new, :edit, :create, :update]
-  	resources :users,      only:[:show, :edit, :update, :destroy]
-  	resource  :likes,      only:[:create, :destroy]
+  	resources :theaters,     only:[:show, :index] do
+  	 resources :theaterlikes,  only:[:create, :destroy]
+    end
+  	resources :reviews,      only:[:new, :edit, :create, :update] do
+     resources :reviewlikes, only:[:create, :destroy]
+     resources :spendlikes,  only:[:create, :destroy]
+    end
+  	resources :users,        only:[:show, :edit, :update, :destroy]
 
   end
       root "users/theaters#index"

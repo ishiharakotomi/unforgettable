@@ -1,6 +1,6 @@
-class CreateLikes < ActiveRecord::Migration[5.2]
+class CreateTheaterlikes < ActiveRecord::Migration[5.2]
   def change
-    create_table :likes do |t|
+    create_table :theaterlikes do |t|
       t.integer :theater_id
       t.integer :user_id
 

@@ -1,0 +1,2 @@
+module Users::SpendlikesHelper
+end

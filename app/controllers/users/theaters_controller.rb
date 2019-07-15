@@ -9,6 +9,6 @@ class Users::TheatersController < ApplicationController
     	@theater = Theater.find(params[:id])
     	@reviews = @theater.reviews.where(review_type: 0)
         @review = Review.new
-        @shops = @theater.reviews.where(review_type: 1)
+        @reviews = @theater.reviews.where(review_type: 1)
 	end
 end

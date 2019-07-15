@@ -1,0 +1,2 @@
+class Theaterlike < ApplicationRecord
+end
