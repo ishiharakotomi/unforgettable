@@ -1,0 +1,89 @@
+  <div>
+    <h2>メッセージ確認</h2>
+
+    <div>
+      <strong>ニックネーム</strong>
+      <p>
+        <%= @contact.nickname %>
+      </p>
+    </div>
+
+    <div>
+      <strong>氏名</strong>
+      <p>
+        <%= @contact.name %>
+      </p>
+    </div>
+
+    <div>
+      <strong>氏名（カナ）</strong>
+      <p>
+        <%= @contact.name_kana %>
+      </p>
+    </div>
+
+    <div>
+      <strong>メールアドレス</strong>
+      <p>
+        <%= @contact.email %>
+      </p>
+    </div>
+
+    <div>
+      <strong>ご担当者：</strong>
+      <p>
+        <%= @contact.responsible %>
+      </p>
+    </div>
+
+    <div>
+      <strong>お電話番号：</strong>
+      <p>
+        <%= @contact_request.phonenumber %>
+      </p>
+    </div>
+
+    <div>
+      <strong>郵便番号：</strong>
+      <p>
+        <%= @contact_request.postcode %>
+      </p>
+    </div>
+
+    <div>
+      <strong>都道府県：</strong>
+      <p>
+        <%= @contact_request.prefecture_name %>
+      </p>
+    </div>
+
+    <div>
+      <strong>市区：</strong>
+      <p>
+        <%= @contact_request.address_city %>
+      </p>
+    </div>
+
+    <div>
+      <strong>建物名・部屋番号：</strong>
+      <p>
+        <%= @contact_request.address_building %>
+      </p>
+    </div>
+
+    <div>
+      <strong>店舗URL：</strong>
+      <p>
+        <%= @contact_request.theater_url %>
+      </p>
+    </div>
+
+    <div>
+      <strong>お問い合わせ内容：</strong>
+      <p>
+        <%= simple_format(@contact.message) %>
+      </p>
+    </div>
+
+    <%= link_to '送信する', users_contact_request_done_path(@contact), method: :patch %>
+  </div>

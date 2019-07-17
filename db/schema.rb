@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_15_101646) do
+ActiveRecord::Schema.define(version: 2019_07_16_110722) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,18 +24,34 @@ ActiveRecord::Schema.define(version: 2019_07_15_101646) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "contacts", force: :cascade do |t|
+  create_table "contact_requests", force: :cascade do |t|
     t.string "email"
     t.text "message"
-    t.string "contact_type：integer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "contact_type"
-    t.string "inquiry"
-    t.string "request"
     t.string "nickname"
     t.string "name"
     t.string "name_kana"
+    t.integer "postcode"
+    t.string "address_city"
+    t.string "phonenumber"
+    t.string "address_street"
+    t.string "address_building"
+    t.string "prefecture_name"
+    t.string "responsible"
+    t.string "theater_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_confirmed", default: false
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "email"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "nickname"
+    t.string "name"
+    t.string "name_kana"
+    t.boolean "is_confirmed", default: false
   end
 
   create_table "reviewlikes", force: :cascade do |t|

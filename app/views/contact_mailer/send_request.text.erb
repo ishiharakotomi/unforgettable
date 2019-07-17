@@ -1,0 +1,17 @@
+<%= @contact.name %>様から掲載依頼がありました。
+
+------------------------------------------------------
+ニックネーム：<%= @contact_request.nickname %>
+氏名：<%= @contact_request.name %>
+氏名（カナ）：<%= @contact_request.name_kana %>
+メールアドレス：<%= @contact_request.email %>
+ご担当者：<%= @contact_request.responsible %>
+お電話番号：<%= @contact_request.phonenumber %>
+郵便番号：<%= @contact_request_request.postcode %>
+都道府県：<%= @contact_request.prefecture_name %>
+市区：<%= @contact_request.address_city %>
+建物名・部屋番号：<%= @contact_request.address_building %>
+店舗URL：<%= @contact_request.theater_url %>
+------------------------------------------------------
+お問い合わせ内容：<%= @contact_request.message %>
+------------------------------------------------------

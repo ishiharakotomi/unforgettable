@@ -1,0 +1,60 @@
+<h1>お問い合わせフォーム</h1>
+
+劇場の掲載依頼やお問い合わせにつきましては、「掲載依頼はこちら」よりお進みください。<br>
+ログインされている方とご担当者様が異なる場合には、ご連絡可能なお電話番号・メールアドレス・ご担当者名をお知らせください。
+
+<div class='tabs'>
+  <div class='tab-buttons'>
+    <span class='content1'>お問い合わせはこちら</span>
+    <span class='content2'>掲載依頼はこちら</span>
+      <div id='lamp' class='content1'></div>
+  </div>
+      <div class='tab-content'>
+
+        <div class="content1">
+          <%= form_for @contact, url: users_contacts_path do |f| %>
+            <p> ニックネーム：<%= current_user.nickname + "さん" %></p>
+            <p> 氏名：<%= f.text_field :name, value: current_user.name %></p>
+            <p> 氏名（カナ）：<%= f.text_field :name_kana, value: current_user.name_kana %></p>
+            <p> メールアドレス：<%= f.text_field :email, value: current_user.email %></p>
+            <p> お問い合わせ内容：<%= f.text_area :message %></p>
+            <%= f.submit '入力確認画面へ進む' %>
+          <% end %>
+        </div>
+
+        <div class="content2">
+          <%= form_for @request, url: users_contacts_path do |f| %>
+            <p> ニックネーム：<%= current_user.nickname + "さん" %></p>
+            <p> 氏名：<%= f.text_field :name, value: current_user.name %></p>
+            <p> 氏名（カナ）：<%= f.text_field :name_kana, value: current_user.name_kana %></p>
+            <p> ご担当者名：<%= f.text_field :responsible %></p>
+            <p> メールアドレス：<%= f.text_field :email, value: current_user.email %></p>
+            <p> お電話番号：<%= f.text_field :phonenumber %></p>
+            <p> 郵便番号：<%= f.text_field :postcode %></p>
+            <p> 都道府県：<%= f.text_field :prefecture_name, collection: JpPrefecture::Prefecture.all, :value_method => :name, include_blank: '都道府県' %></p>
+            <p> 市区：<%= f.text_field :address_city %></p>
+            <p> 建物名・部屋番号：<%= f.text_field :address_building %></p>
+            <p> 店舗URL：<%= f.text_field :theater_url %></p>
+            <p> お問い合わせ内容・店舗PRなど：<%= f.text_area :message %></p>
+            <%= f.submit '入力確認画面へ進む' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+<script>
+$('.tab-content>div').hide();
+$('.tab-content>div').first().slideDown();
+  $('.tab-buttons span').click(function(){
+    var thisclass=$(this).attr('class');
+    $('#lamp').removeClass().addClass('#lamp').addClass(thisclass);
+    $('.tab-content>div').each(function(){
+      if($(this).hasClass(thisclass)){
+        $(this).fadeIn(800);
+      }
+      else{
+        $(this).hide();
+      }
+    });
+  });
+</script>

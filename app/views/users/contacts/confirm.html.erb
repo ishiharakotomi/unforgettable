@@ -1,0 +1,50 @@
+
+<!-- お問い合わせの確認画面 -->
+  <div>
+    <h2>メッセージ確認</h2>
+
+    <div>
+      <strong>ニックネーム</strong>
+      <p>
+        <%= @contact.nickname %>
+      </p>
+    </div>
+
+    <div>
+      <strong>氏名</strong>
+      <p>
+        <%= @contact.name %>
+      </p>
+    </div>
+
+    <div>
+      <strong>氏名（カナ）</strong>
+      <p>
+        <%= @contact.name_kana %>
+      </p>
+    </div>
+
+    <div>
+      <strong>メールアドレス</strong>
+      <p>
+        <%= @contact.email %>
+      </p>
+    </div>
+
+    <div>
+      <strong>内容</strong>
+      <p>
+        <%= simple_format(@contact.message) %>
+      </p>
+    </div>
+
+      <%= link_to '送信', users_contact_done_path(@contact), method: :patch %>
+  </div>
+
+
+<!-- お問い合わせの確認画面 -->
+
+
+
+<!-- 掲載依頼の確認画面 -->
+<!-- 掲載依頼の確認画面 -->
