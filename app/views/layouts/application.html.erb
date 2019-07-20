@@ -41,7 +41,7 @@
               <%#= submit_tag "Search", :name => nil %>
             <%# end %>
           </il>
-          <il class="menu-item"><%= link_to "contact", new_contact_path %></il>
+          <il class="menu-item"><%= link_to "contact", new_users_contact_path %></il>
           <il class="menu-item"><%= link_to "log out", destroy_admin_session_path, method: :delete %></il>
 
         <% else %>
@@ -53,7 +53,7 @@
               <%#= submit_tag "Search", :name => nil %>
             <%# end %>
             </il>
-          <il class="menu-item"><%= link_to "contact", new_contact_path %></il>
+          <il class="menu-item"><%= link_to "contact", new_users_contact_path %></il>
           <% end %>
     </ul>
   </nav>
