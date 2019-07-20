@@ -7,8 +7,8 @@ class Users::TheatersController < ApplicationController
 
 	def show
     	@theater = Theater.find(params[:id])
-    	@reviews = @theater.reviews.where(review_type: 0)
+    	@review0 = @theater.reviews.where(review_type: 0)
         @review = Review.new
-        @reviews = @theater.reviews.where(review_type: 1)
+        @review1 = @theater.reviews.where(review_type: 1)
 	end
 end

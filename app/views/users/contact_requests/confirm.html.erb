@@ -1,44 +1,51 @@
+ <%= form_for @contact_request, :url => users_contact_request_done_path do |f| %>
+
   <div>
     <h2>メッセージ確認</h2>
 
     <div>
       <strong>ニックネーム</strong>
       <p>
-        <%= @contact.nickname %>
+        <%= @contact_request.nickname %>
       </p>
     </div>
 
     <div>
       <strong>氏名</strong>
       <p>
-        <%= @contact.name %>
+        <%= f.hidden_field :name %>
+        <%= @contact_request.name %>
       </p>
     </div>
 
     <div>
       <strong>氏名（カナ）</strong>
       <p>
-        <%= @contact.name_kana %>
+        <%= f.hidden_field :name_kana %>
+        <%= @contact_request.name_kana %>
       </p>
     </div>
 
     <div>
       <strong>メールアドレス</strong>
       <p>
-        <%= @contact.email %>
+        <%= f.hidden_field :email %>
+        <%= @contact_request.email %>
       </p>
     </div>
 
     <div>
       <strong>ご担当者：</strong>
       <p>
-        <%= @contact.responsible %>
+        <%= f.hidden_field :responsible %>
+        <%= @contact_request.responsible %>
       </p>
     </div>
 
     <div>
       <strong>お電話番号：</strong>
       <p>
+        <%= f.hidden_field :phonenumber %>
         <%= @contact_request.phonenumber %>
       </p>
     </div>
@@ -46,6 +53,7 @@
     <div>
       <strong>郵便番号：</strong>
       <p>
+        <%= f.hidden_field :postcode %>
         <%= @contact_request.postcode %>
       </p>
     </div>
@@ -53,6 +61,7 @@
     <div>
       <strong>都道府県：</strong>
       <p>
+        <%= f.hidden_field :prefecture_name %>
         <%= @contact_request.prefecture_name %>
       </p>
     </div>
@@ -60,6 +69,7 @@
     <div>
       <strong>市区：</strong>
       <p>
+        <%= f.hidden_field :address_city %>
         <%= @contact_request.address_city %>
       </p>
     </div>
@@ -67,6 +77,7 @@
     <div>
       <strong>建物名・部屋番号：</strong>
       <p>
+        <%= f.hidden_field :address_building %>
         <%= @contact_request.address_building %>
       </p>
     </div>
@@ -74,6 +85,7 @@
     <div>
       <strong>店舗URL：</strong>
       <p>
+        <%= f.hidden_field :theater_url %>
         <%= @contact_request.theater_url %>
       </p>
     </div>
@@ -81,9 +93,12 @@
     <div>
       <strong>お問い合わせ内容：</strong>
       <p>
-        <%= simple_format(@contact.message) %>
+        <%= f.hidden_field :message %>
+        <%= simple_format(@contact_request.message) %>
       </p>
     </div>
 
-    <%= link_to '送信する', users_contact_request_done_path(@contact), method: :patch %>
+    <%= f.submit '戻る', name: 'back', mehod: :post %>
+    <%= f.submit '送信する', method: :patch %>
   </div>
+  <% end %>

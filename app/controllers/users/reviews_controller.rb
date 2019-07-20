@@ -1,5 +1,10 @@
 class Users::ReviewsController < ApplicationController
 
+    def reviewlikes
+        @user = User.find_by(id: params[:id])
+        @reviewlikes = Reviewlike.where(user_id: @user.id)
+    end
+
 	def create
 		@review = Review.new(review_params)
 		@review.user_id = current_user.id

@@ -1,4 +1,10 @@
 class Users::TheaterlikesController < ApplicationController
+
+    def theaterlikes
+        @user = User.find_by(id: params[:id])
+        @theaterlikes = Theaterlike.where(user_id: @user.id)
+    end
+
     def create
         theater = Theater.find(params[:theater_id])
         theaterlikes = current_user.theaterlikes.new(theater_id: theater.id)

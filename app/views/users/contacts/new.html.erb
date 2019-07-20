@@ -23,7 +23,7 @@
         </div>
 
         <div class="content2">
-          <%= form_for @request, url: users_contacts_path do |f| %>
+          <%= form_for @request, url: users_contact_requests_create_path do |f| %>
             <p> ニックネーム：<%= current_user.nickname + "さん" %></p>
             <p> 氏名：<%= f.text_field :name, value: current_user.name %></p>
             <p> 氏名（カナ）：<%= f.text_field :name_kana, value: current_user.name_kana %></p>

@@ -1,9 +1,0 @@
-<p><%= current_user.nickname %>さんのマイページ</p>
-
-<%= attachment_image_tag @user, :profile_image, fallback: "profile_noimage.png" %>
-
-<p>クリップした劇場</p>
-<p>クリップしたポスト</p>
-<p><%= current_user.nickname + "さんのポスト" %></p>
-
-<%= link_to "マイページ編集", edit_users_user_path %>

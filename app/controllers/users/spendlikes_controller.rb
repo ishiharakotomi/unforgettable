@@ -2,7 +2,7 @@ class Users::SpendlikesController < ApplicationController
 
     def create
     	review = Review.find(params[:review_id])
-    	spendlike = review.spendlikes.build(user_id: current_user.id)
+    	spendlike = current_user.spendlikes.new(review_id: review.id)
         spendlike.save!
         redirect_to users_theater_path(spendlike.review.theater)
     end

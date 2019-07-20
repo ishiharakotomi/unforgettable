@@ -18,8 +18,14 @@ class Users::ContactsController < ApplicationController
 
     def done
         @contact = Contact.find(params[:id])
+     if params[:back]
+        @contact = Contact.new(contact_params)
+        @request = ContactRequest.new
+        render :action => 'new'
+     else
         ContactMailer.send_contact(@contact).deliver_now
         redirect_to root_path
+     end
     end
 
     private

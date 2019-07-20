@@ -1,0 +1,34 @@
+
+<p>クリップした劇場</p>
+  <% @user.theaterlikes.each do |f| %>
+    <%= attachment_image_tag f.theater, :theater_image, size: '120x100',fallback: "noimage.jpg" %>
+    <%= f.theater.theater_name %>
+  <% end %>
+
+  <h2>
+      クリップしたreview
+  </h2>
+  <% @user.reviewlikes.each do |f| %>
+    <p>ニックネーム：<%= f.review.user.nickname %></p>
+    <p>題目：<%= f.review.title %></p>
+    <p>内容：<%= f.review.body %></p>
+  <% end %>
+
+  <h2>
+      クリップしたosusume spot/spend
+  </h2>
+  <% @user.spendlikes.each do |f| %>
+    <p>ニックネーム：<%= f.user.nickname %></p>
+    <p>題目：<%= f.review.title %></p>
+    <p>内容：<%= f.review.body %></p>
+  <% end %>
+
+  <h2>
+  <%= @user.nickname + "さんのポスト" %>
+  </h2>
+    <% current_user.reviews.each do |f| %>
+    <p>ニックネーム：<%= f.user.nickname %></p>
+    <p>題目：<%= f.title %></p>
+    <p>user：<%= @user.id %></p>
+    <p>内容：<%= f.body %></p>
+  <% end %>

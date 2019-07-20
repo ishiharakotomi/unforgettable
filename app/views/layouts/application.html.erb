@@ -34,8 +34,8 @@
 
         <% elsif user_signed_in? %>
           <il class="menu-item"><%= current_user.nickname + "さん" %></il>
-          <il class="menu-item"><%= link_to "my page", users_user_path(current_user) %></il>
-          <il class="menu-item">
+          <il class="menu-item"><%= link_to "my page",  users_sidebar_path(current_user) %></il>
+          <il class="menu-item"><%= link_to "my clip", users_sidebars_path %></il>
             <%#= form_tag search_items_path, :method => 'get' do %>
               <%#= text_field_tag :search, params[:search], size: "40",placeholder: "劇場名"  %>
               <%#= submit_tag "Search", :name => nil %>
@@ -53,7 +53,6 @@
               <%#= submit_tag "Search", :name => nil %>
             <%# end %>
             </il>
-          <il class="menu-item"><%= link_to "contact", new_users_contact_path %></il>
           <% end %>
     </ul>
   </nav>

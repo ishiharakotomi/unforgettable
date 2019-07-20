@@ -64,7 +64,7 @@ Rails.application.configure do
       :address => "smtp.gmail.com",
       :port => 587,
       :domain => "gmail.com",
-      :user_name => 'ishihara.5103@gmail.com',
+      :user_name => ENV['UNFORGETTABLE'],
       :password => "dpkyirtckslhtwdp", #2段階認証パスワード
       :authentication => :plain,
       :enable_starttls_auto => true
