@@ -5,7 +5,7 @@
     <% @theaterlikes.each do |f| %>
       <div class="col-xs-4">
         <%= link_to users_theater_path(f), data: {"turbolinks" => false} do %>
-          <p><%= attachment_image_tag f.theater, :theater_image, fallback: "noimage.jpg", class: "theaterimageclip" %></p>
+          <p><%= attachment_image_tag f.theater, :theater_image, fallback: "/images/oimage.jpg", class: "theaterimageclip" %></p>
           <p> 劇場名：<%= f.theater.theater_name %></p>
         <% end %>
           <p> 住所：<%= f.theater.prefecture_name %><%= f.theater.address_city %><%= f.theater.address_street %></p>
