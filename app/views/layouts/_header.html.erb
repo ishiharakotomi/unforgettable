@@ -1,0 +1,5 @@
+    <% if admin_signed_in? %>
+    <% elsif user_signed_in? %>
+    <% else %>
+    <p class="heading"><%= link_to "sign up", new_user_registration_path %> ／ <%= link_to "log in", new_user_session_path %></p>
+    <% end %>

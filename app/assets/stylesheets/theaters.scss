@@ -1,0 +1,78 @@
+// Place all the styles related to the user::theaters controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.search {
+  margin-bottom: 20px;
+}
+
+.searchheight {
+  height: 60px;
+}
+
+.theaterimage {
+  height: 170px;
+}
+
+.theaterimage_show {
+	height: 350px;
+}
+
+.theaterimage_row {
+	height: 350px;
+  display: flex;
+	align-items: center;
+	margin-bottom: 50px
+}
+
+.theater_introduction {
+  margin-bottom: 50px;
+}
+
+.editdestroy {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+#form4{
+position:relative;
+max-width:300px;
+margin-bottom:20px;
+}
+
+#sbox4{
+height: 40px;
+width: 300px;
+padding: 0 15px;
+position:absolute;
+left: 0;
+top: 0;
+border-radius: 25px;
+outline: 0;
+background: #eee;
+border:none;
+}
+
+#sbtn4{
+height: 40px;
+width: 50px;
+position:absolute;
+left: 250px;
+top: 0;
+background: navy;
+color: #fff;
+border:none;
+border-radius: 0 25px 25px 0;
+}
+
+#sbtn4 .fa-search{
+font-size: 20px;
+position:absolute;
+top: 30%;
+left: 30%;
+}
+
+#sbtn4:hover{
+color: #888;
+}

@@ -1,68 +1,124 @@
-<h1>劇場詳細</h1>
+<div class="container">
 
-<h3><%= link_to "劇場編集", edit_admins_theater_path %></h3>
-<h3><%= link_to "削除", admins_theater_path(@theater), method: :delete,  data: {confirm: "本当に削除しますか？"} %>
-
-    <%= attachment_image_tag @theater, :theater_image, fallback: "noimage.jpg" %>
-    <p> 劇場名： <%= @theater.theater_name %></p>
-    <p> 劇場紹介： <%= @theater.introduction %></p>
-    <p> 郵便番号： <%= @theater.postcode %></p>
-    <p> 都道府県： <%= @theater.prefecture_name %></p>
-    <p> 市区： <%= @theater.address_city %></p>
-    <p> 町村： <%= @theater.address_street %></p>
-    <p> 建物名： <%= @theater.address_building %></p>
-    <p> 電話番号： <%= @theater.phonenumber %></p>
-
-<h2>コメント一覧</h2>
-
-<div class='tabs'>
-  <div class='tab-buttons'>
-    <span class='content1'>review</span>
-    <span class='content2'>osusume</span>
-      <div id='lamp' class='content1'></div>
+  <div class="row">
+    <div class="col-xs-9"></div>
+    <div class="col-xs-3">
+      <%= search_form_for @search, url: root_path, html: {id:"form4"} do |f| %>
+        <%= f.search_field :prefecture_name_or_theater_name_cont, id: "sbox4", placeholder:"劇場名/都道府県" %>
+        <%= button_tag id: "sbtn4", type: "submit" do %>
+          <i class="fas fa-search"></i>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-        <div class='tab-content'>
 
-          <div class='content1'>
-            <% @reviews.each do |r| %>
-              <p> ニックネーム： <%= r.user.nickname %></p>
-              <p> 題目： <%= r.title %></p>
-              <p> 内容： <%= r.body %></p>
-              <%= attachment_image_tag (r), :review_image %>
-              <p><%= link_to '削除', method: :delete %></p>
-            <% end %>
+  <div class="row heading">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4">Theater Details</div>
+    <div class="col-xs-4"></div>
+  </div>
 
-            <%= form_for [@theater, @review], url:{controller:'reviews', action:'create'} do |f| %>
-              <%= f.attachment_field :review_image %>
-              <p> 題目：<%= f.text_field :title %></p>
-              <p> 内容：<%= f.text_area :body %></p>
-              <%= f.hidden_field :theater_id, value: params[:id] %>
-              <%= f.hidden_field :review_type, value: 0 %>
+  <div class="row theaterimage_row">
+    <%= attachment_image_tag @theater, :theater_image, fallback: "noimage.jpg", class: 'theaterimage_show center-block' %>
+  </div>
 
-              <%= f.submit 'review' %>
-            <% end %>
+  <div class="row editdestroy">
+    <%= link_to "編集", edit_admins_theater_path, data: {"turbolinks" => false} %>／<%= link_to "削除", admins_theater_path(@theater), method: :delete,  data: {confirm: "本当に削除しますか？"} %>
+  </div>
+
+
+  <table>
+    <tr>
+      <td class="contacttablewidth">劇場名</td>
+      <td><%= @theater.theater_name %></td>
+    </tr>
+
+    <tr>
+      <td class="contacttablewidth">劇場紹介</td>
+      <td><%= @theater.introduction %></td>
+    </tr>
+
+    <tr>
+      <td class="contacttablewidth">住所</td>
+      <td>〒<%= @theater.postcode %><%= @theater.prefecture_name %><%= @theater.address_city %><%= @theater.address_street %><%= @theater.address_building %></td>
+    </tr>
+
+    <tr>
+      <td class="contacttablewidth">電話番号</td>
+      <td><%= @theater.phonenumber %></td>
+    </tr>
+  </table>
+
+        <% if user_signed_in? && @theater.liked_by?(current_user) %>
+          <%= link_to users_theater_theaterlike_path(@theater), method: :delete do %>
+            <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
+            <%= @theater.theaterlikes.count %>
+          <% end %>
+        <% else %>
+          <%= link_to users_theater_theaterlikes_path(@theater.id), method: :post do %>
+            <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
+            <%= @theater.theaterlikes.count %>
+          <% end %>
+        <% end %>
+
+    <div class="row heading">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-6">review ＆ recommend spot/spend</div>
+      <div class="col-xs-3"></div>
+    </div>
+
+  <div class='tabs'>
+    <div class='tab-buttons'>
+      <span class='content1'>review</span>
+      <span class='content2'>recommend</span>
+      <div id='lamp' class='content1'></div>
+    </div>
+
+    <div class="row tab-content">
+      <div class='content1 col-xs-6 col-xs-offset-3'>
+          <% @review0.each do |review| %>
+            <div class="row revieweach">
+              <div class="col-xs-4">
+                <%= attachment_image_tag @user, :profile_image, fallback: "profile_noimage.png", size:"120x120"%>
+              </div>
+              <div class="col-xs-8">
+                <p><%= review.user.nickname %></p>
+                <p> title：<%= review.title %></p>
+                <p> review：<%= review.body %></p>
+                <%= attachment_image_tag (review), :review_image, class: "reviewimage" %>
+                <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
+                <%= review.reviewlikes.count %>
+                <p><%= link_to '削除', admins_review_path(review), method: :delete,  data: {confirm: "本当に削除しますか？"} %></p>
+              </div>
+            </div>
+          <% end %>
+        <%= paginate @review0, class: "paginate" %>
+      </div>
+
+    <div class="content2 col-xs-6 col-xs-offset-3">
+      <div class="row review">
+        <% @review1.each do |spend| %>
+          <div class="row revieweach">
+            <div class="col-xs-4">
+              <%= attachment_image_tag current_user, :profile_image, fallback: "profile_noimage.png", size:"120x120"%>
+            </div>
+            <div class="col-xs-8">
+              <p><%= spend.user.nickname %></p>
+              <p> title：<%= spend.title %></p>
+              <p> recommend：<%= spend.body %></p>
+              <%= attachment_image_tag spend, :review_image, class: "reviewimage" %>
+              <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
+              <%= spend.reviewlikes.count %>
+              <p><%= link_to '削除', admins_review_path(spend), method: :delete,  data: {confirm: "本当に削除しますか？"} %></p>
+            </div>
           </div>
+        <% end %>
+        <%= paginate @review1, class: "paginate" %>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <div class="content2">
-            <% @shops.each do |s| %>
-              <p> ニックネーム： <%= s.user.nickname %></p>
-              <p> 題目： <%= s.title %></p>
-              <p> 内容： <%= s.body %></p>
-              <%= attachment_image_tag (s), :review_image %>
-                <p><%= link_to '削除', method: :delete %></p>
-            <% end %>
-
-            <%= form_for [@theater, @review], url:{controller:'reviews', action:'create'} do |f| %>
-              <%= f.attachment_field :review_image %>
-              <p> 題目：<%= f.text_field :title %></p>
-              <p> 内容：<%= f.text_area :body %></p>
-              <%= f.hidden_field :theater_id, value: params[:id] %>
-              <%= f.hidden_field :review_type, value: 1 %>
-
-              <%= f.submit 'osusume' %>
-            <% end %>
-          </div>
-        </div>
 
 <script>
 $('.tab-content>div').hide();

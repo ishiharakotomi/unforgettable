@@ -1,89 +1,74 @@
-  <div>
-    <h2>メッセージ確認</h2>
+<div class="container">
+  <div class="row heading">掲載依頼の確認</div>
 
-    <div>
-      <strong>ニックネーム</strong>
-      <p>
-        <%= @contact.nickname %>
-      </p>
-    </div>
+    <%= form_for @contact_request, :url => users_contact_request_done_path do |f| %>
+      <table class="contacttable">
 
-    <div>
-      <strong>氏名</strong>
-      <p>
-        <%= @contact.name %>
-      </p>
-    </div>
+        <tr>
+          <td class="contacttablewidth">氏名</td>
+          <%= f.hidden_field :name %>
+          <td><%= @contact_request.name %></td>
+        </tr>
 
-    <div>
-      <strong>氏名（カナ）</strong>
-      <p>
-        <%= @contact.name_kana %>
-      </p>
-    </div>
+        <tr>
+          <td class="contacttablewidth">氏名（カナ）</td>
+          <%= f.hidden_field :name_kana %>
+          <td><%= @contact_request.name_kana %></td>
+        </tr>
 
-    <div>
-      <strong>メールアドレス</strong>
-      <p>
-        <%= @contact.email %>
-      </p>
-    </div>
+        <tr>
+          <td class="contacttablewidth">メールアドレス</td>
+          <%= f.hidden_field :email %>
+          <td><%= @contact_request.email %></td>
+        </tr>
 
-    <div>
-      <strong>ご担当者：</strong>
-      <p>
-        <%= @contact.responsible %>
-      </p>
-    </div>
+        <tr>
+            <td class="contacttablewidth">ご担当者</td>
+            <%= f.hidden_field :responsible %>
+            <td><%= @contact_request.responsible %></td>
+        </tr>
 
-    <div>
-      <strong>お電話番号：</strong>
-      <p>
-        <%= @contact_request.phonenumber %>
-      </p>
-    </div>
+        <tr>
+            <td class="contacttablewidth">お電話番号</td>
+            <%= f.hidden_field :phonenumber %>
+            <td><%= @contact_request.phonenumber %></td>
+        </tr>
 
-    <div>
-      <strong>郵便番号：</strong>
-      <p>
-        <%= @contact_request.postcode %>
-      </p>
-    </div>
+        <tr>
+            <td class="contacttablewidth">ご住所</td>
+            <%= f.hidden_field :postcode %>
+            <td>〒<%= @contact_request.postcode %></td>
+            <%= f.hidden_field :prefecture_name %>
+            <td><%= @contact_request.prefecture_name %></td>
+            <%= f.hidden_field :address_city %>
+            <td><%= @contact_request.address_city %></td>
+            <%= f.hidden_field :address_street %>
+            <td><%= @contact_request.address_street %></td>
+        </tr>
 
-    <div>
-      <strong>都道府県：</strong>
-      <p>
-        <%= @contact_request.prefecture_name %>
-      </p>
-    </div>
+        <tr>
+            <td class="contacttablewidth">建物名／部屋番号</td>
+            <%= f.hidden_field :address_building %>
+            <td><%= @contact_request.address_building %></td>
+        </tr>
 
-    <div>
-      <strong>市区：</strong>
-      <p>
-        <%= @contact_request.address_city %>
-      </p>
-    </div>
+        <tr>
+            <td class="contacttablewidth">施設URL</td>
+            <%= f.hidden_field :theater_url %>
+            <td><%= @contact_request.theater_url %></td>
+        </tr>
 
-    <div>
-      <strong>建物名・部屋番号：</strong>
-      <p>
-        <%= @contact_request.address_building %>
-      </p>
-    </div>
+        <tr>
+            <td class="contacttablewidth">掲載依頼内容</td>
+            <%= f.hidden_field :message %>
+            <td><%= simple_format(@contact_request.message) %></td>
+        </tr>
+      </table>
 
-    <div>
-      <strong>店舗URL：</strong>
-      <p>
-        <%= @contact_request.theater_url %>
-      </p>
-    </div>
-
-    <div>
-      <strong>お問い合わせ内容：</strong>
-      <p>
-        <%= simple_format(@contact.message) %>
-      </p>
-    </div>
-
-    <%= link_to '送信する', users_contact_request_done_path(@contact), method: :patch %>
-  </div>
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <%= f.submit '戻る', name: 'back', mehod: :post, class: "editbtn col-xs-4" %>
+        <%= f.submit '送信する', method: :patch, class: "editbtn col-xs-4" %>
+      </div>
+    <% end %>
+</tr>

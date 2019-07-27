@@ -1,37 +1,36 @@
 <div class="container">
+    <% if @theater.errors.any? %>
+      <%= @theater.errors.count %>件のエラーが発生しました
+      <% @theater.errors.full_messages.each do |message| %>
+        <%= message %>
+      <% end %>
+    <% end %>
+  <div class="row heading">New heater</div>
+    <div class="row col-md-4 col-md-offset-4">
+      <%= form_for [:admins, @theater] do |f| %>
 
-  <h1>劇場追加</h1>
+        <p class="profileedit">画像追加</p>
+        <%= f.attachment_field :theater_image %>
 
-    <%= form_for [:admins, @theater] do |f| %>
+        <p class="profileedit">劇場名</p>
+        <%= f.text_field :theater_name, class: "col-xs-12" %> <br>
 
-      <h3>画像追加</h3>
-      <%= f.attachment_field :theater_image %>
+        <p class="profileedit">劇場紹介</p>
+        <%= f.text_area :introduction, class: "col-xs-12" %> <br>
 
-      <h3>劇場名</h3>
-      <%= f.text_field :theater_name %>
+        <p class="profileedit">郵便番号</p>
+        <%= f.text_field :postcode, class: "col-xs-12" %>
+        <%= f.text_field :prefecture_name, collection: JpPrefecture::Prefecture.all, :value_method => :name, include_blank: '都道府県', class: "col-xs-12" %>
+        <%= f.text_field :address_city, class: "col-xs-12" %>
+        <%= f.text_field :address_street, class: "col-xs-12" %> <br>
 
-      <h3>劇場紹介</h3>
-      <%= f.text_area :introduction %>
+        <p class="profileedit">建物名・部屋番号</p>
+        <%= f.text_field :address_building, class: "col-xs-12" %> <br>
 
-      <h3>郵便番号</h3>
-      <%= f.text_field :postcode %>
+        <p class="profileedit">電話番号</p>
+        <%= f.text_field :phonenumber, class: "col-xs-12" %> <br>
 
-      <h3>都道府県</h3>
-      <%= f.text_field :prefecture_name, collection: JpPrefecture::Prefecture.all, :value_method => :name, include_blank: '都道府県' %>
-
-      <h3>市区</h3>
-      <%= f.text_field :address_city %>
-
-      <h3>町村</h3>
-      <%= f.text_field :address_street %>
-
-      <h3>建物名・部屋番号</h3>
-      <%= f.text_field :address_building %>
-
-      <h3>電話番号</h3>
-      <%= f.text_field :phonenumber %>
-
-      <%= f.submit '掲載' %>
-
-  <% end %>
+        <%= f.submit 'new！', class: "profileeditform editbtn" %>
+      <% end %>
+  </div>
 </div>

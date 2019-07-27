@@ -32,8 +32,7 @@ body{
 
 .tab-content{
   border-bottom:3px solid #ddd;
-  padding:15px;
-  background:#eee;
+  padding:15px 0;
   display:block;
   font:400 13px 'open sans',sans-serif;
   color:#333;
@@ -66,4 +65,36 @@ body{
 -o-transition: all .3s ease-in;
 -webkit-transition: all .3s ease-in;
 -moz-transition: all .3s ease-in;
+}
+
+.reviewform {
+  text-align: center;
+  margin: 0 auto;
+  display: inline-block;
+  text-align: center;
+}
+
+.reviewbtn {
+  width: 440px;
+  background-color: #01abaa;
+  color: #faf2c8;
+  margin: 10px 0;
+  height: 25px;
+}
+
+.review {
+  margin: 10px 0;
+}
+
+.revieweach {
+  margin-top: 20px;
+}
+
+.reviewprofileimage {
+  height: 150px;
+  float: left;
+}
+
+.reviewtitlecontent {
+  float: left;
 }

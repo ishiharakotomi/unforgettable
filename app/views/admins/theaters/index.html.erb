@@ -1,18 +1,30 @@
-<%= link_to "劇場追加", new_admins_theater_path %> |
-<%= link_to "LOG OUT", destroy_admin_session_path, method: :delete %>
-<br>
-<% @theaters.each do |theater|%>
+  <div class="row searchheight">
+    <div class="col-xs-8"></div>
+      <div class="col-xs-4">
+        <%= search_form_for @search, url: admins_theaters_path do |f| %>
+          <%= f.search_field :prefecture_name_or_theater_name_cont, id: "sbox4", placeholder:"劇場名/都道府県" %>
+          <%= button_tag id: "sbtn4", type: "submit" do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+        <% end %>
+      </div>
+  </div>
 
-  <%= link_to admins_theater_path(theater) do %>
-    <%= attachment_image_tag theater, :theater_image, fallback: "noimage.jpg" %>
-    <p> 劇場名： <%= theater.theater_name %></p>
-  <% end %>
-    <p> 劇場紹介： <%= theater.introduction %></p>
-    <p> 郵便番号： <%= theater.postcode %></p>
-    <p> 都道府県： <%= theater.prefecture_name %></p>
-    <p> 市区： <%= theater.address_city %></p>
-    <p> 町村： <%= theater.address_street %></p>
-    <p> 建物名： <%= theater.address_building %></p>
-    <p> 電話番号： <%= theater.phonenumber %></p>
+  <div class="row alink">
+    <% @theaters.each do |t|%>
+      <div class="col-xs-4">
+        <div class="theaterindex">
+          <%= link_to admins_theater_path(t), data: {"turbolinks" => false} do %>
+            <%= attachment_image_tag t, :theater_image, fallback: "noimage.jpg", class: 'theaterimage' %>
+            <p class="theatername"> 劇場名： <%= t.theater_name %></p>
+          <% end %>
+          <p class="alink">住所：<%= t.prefecture_name %><%= t.address_city %><%= t.address_street %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-<% end %>
+  <div class="row pageng">
+    <%= paginate @theaters, class: "paginate col-xs-12" %>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 class Admins::ApplicationController < ApplicationController
+	before_action :authenticate_admin!
 
   include JpPrefecture
     jp_prefecture :prefecture_code
@@ -10,5 +11,4 @@ class Admins::ApplicationController < ApplicationController
   def prefecture_name=(prefecture_name)
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
-
 end

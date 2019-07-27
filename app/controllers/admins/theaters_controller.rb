@@ -2,15 +2,17 @@ class Admins::TheatersController < ApplicationController
 before_action :authenticate_admin!, only: [:index, :show, :new, :edit, :update, :create, :destroy]
 
     def index
-    	@theaters = Theater.all
-    	@theaters = Theater.page(params[:page]).reverse_order
+    	@search = Theater.ransack(params[:q])
+    	@theaters = @search.result.page(params[:page]).reverse_order
     end
 
     def show
     	@theater = Theater.find(params[:id])
-    	@reviews = @theater.reviews.where(review_type: 0)
+    	@review0 = @theater.reviews.where(review_type: 0).page(params[:page]).reverse_order
         @review = Review.new
-        @shops = @theater.reviews.where(review_type: 1)
+        @review1 = @theater.reviews.where(review_type: 1).page(params[:page]).reverse_order
+        @search = Theater.ransack(params[:q])
+        @theaters = @search.result.reverse_order
     end
 
 	def new
@@ -24,13 +26,22 @@ before_action :authenticate_admin!, only: [:index, :show, :new, :edit, :update, 
 	def update
 		@theater = Theater.find(params[:id])
 		@theater.update(theater_params)
-		redirect_to admins_theaters_path(@theater)
+		if @theater.save
+			flash[:notice] = "編集されました"
+			redirect_to admins_theaters_path(@theater)
+		else
+			render 'edit'
+		end
 	end
 
 	def create
 		@theater = Theater.new(theater_params)
-		@theater.save
-		redirect_to admins_theaters_path
+		if @theater.save
+			flash[:notice] = "投稿されました"
+			redirect_to admins_theaters_path
+		else
+			render 'new'
+		end
 	end
 
 	def destroy

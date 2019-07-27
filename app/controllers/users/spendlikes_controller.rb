@@ -1,8 +1,13 @@
 class Users::SpendlikesController < ApplicationController
+    before_action :authenticate_user!
+
+    def index
+        @reviewlikes = Review.where(review_type: 1, user_id: current_user).page(params[:page]).per(8)
+    end
 
     def create
     	review = Review.find(params[:review_id])
-    	spendlike = review.spendlikes.build(user_id: current_user.id)
+    	spendlike = current_user.spendlikes.new(review_id: review.id)
         spendlike.save!
         redirect_to users_theater_path(spendlike.review.theater)
     end

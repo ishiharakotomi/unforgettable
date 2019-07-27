@@ -15,35 +15,40 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admins do
-  	get "search_theaters" => "theaters#search", as:'search_theater'
-  	get "search_users" => "users#search", as:'search_users'
+
   	resources :theaters
   	resources :users,          only:[:index, :show, :edit, :update, :destroy]
   	resources :reviews,        only:[:new, :edit, :create, :update, :destroy]
-
   end
+
     root "users/theaters#index"
 
+
   namespace :users do
-    post 'contacts/create'
-    post 'contact_requests/create'
-    get  'contacts/new' =>'contacts#new'
+    resources :contacts,       only:[:new, :create]
     get 'contacts/:id/confirm' => 'contacts#confirm', as:'contact_confirm'
     patch 'contacts/:id/done' => 'contacts#done', as:'contact_done'
+    get 'contacts/:id/done' => 'contacts#new'
+    resources :contact_requests,       only:[:create]
     get 'contacts_requests/:id/confirm' => 'contact_requests#confirm', as:'contact_request_confirm'
     patch 'contact_requests/:id/done' => 'contact_requests#done', as:'contact_request_done'
-  	get "search_theaters" => "theaters#search", as:'search_theater'
-  	get "search_users" => "users#search", as:'search_users'
+    get 'contact_requests/:id/done' => 'contacts#new'
+    get 'about' => 'theaters#about'
+
+
   	resources :theaters,       only:[:show, :index] do
   	  resources :theaterlikes, only:[:create, :destroy]
     end
-  	resources :reviews,        only:[:new, :edit, :create, :update] do
+  	resources :reviews,        only:[:new, :edit, :create, :update, :destroy] do
       resources :reviewlikes,  only:[:create, :destroy]
       resources :spendlikes,   only:[:create, :destroy]
     end
-  	resources :users,          only:[:show, :edit, :update, :destroy]
-    resources :contacts,       only:[:new, :create]
-
+  	resources :sidebars,       only:[:index]
+    resources :users,          only:[:show, :edit, :update, :destroy]
+    resources :theaterlikes, only:[:index]
+    resources :reviewlikes,  only:[:index]
+    get 'reviewlikeszero' => 'reviewlikes#reviewlikeszero'
+    get 'reviewlikesone' => 'reviewlikes#reviewlikesone'
+    resources :spendlikes,   only:[:index]
   end
-
 end

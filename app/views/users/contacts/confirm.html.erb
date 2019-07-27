@@ -1,50 +1,43 @@
+<div class="container">
+  <div class="row heading">お問い合わせ内容の確認</div>
 
-<!-- お問い合わせの確認画面 -->
-  <div>
-    <h2>メッセージ確認</h2>
+    <%= form_for @contact, :url => users_contact_done_path do |f| %>
+      <table class="contacttable">
+        <tr>
+          <td class="contacttablewidth">ニックネーム</td>
+          <td><%= @contact.nickname %></td>
+        </tr>
 
-    <div>
-      <strong>ニックネーム</strong>
-      <p>
-        <%= @contact.nickname %>
-      </p>
-    </div>
+        <tr>
+          <td class="contacttablewidth">氏名</td>
+          <%= f.hidden_field :name %>
+          <td><%= @contact.name %></td>
+        </tr>
 
-    <div>
-      <strong>氏名</strong>
-      <p>
-        <%= @contact.name %>
-      </p>
-    </div>
+        <tr>
+          <td class="contacttablewidth">氏名（カナ）</td>
+          <%= f.hidden_field :name_kana %>
+          <td><%= @contact.name_kana %></td>
+        </tr>
 
-    <div>
-      <strong>氏名（カナ）</strong>
-      <p>
-        <%= @contact.name_kana %>
-      </p>
-    </div>
+        <tr>
+          <td class="contacttablewidth">メールアドレス</td>
+          <%= f.hidden_field :email %>
+          <td><%= @contact.email %></td>
+        </tr>
 
-    <div>
-      <strong>メールアドレス</strong>
-      <p>
-        <%= @contact.email %>
-      </p>
-    </div>
+        <tr>
+          <td class="contacttablewidth">お問い合わせ内容</td>
+          <%= f.hidden_field :message %>
+          <td><%= simple_format(@contact.message) %></td>
+        </tr>
+      </table>
 
-    <div>
-      <strong>内容</strong>
-      <p>
-        <%= simple_format(@contact.message) %>
-      </p>
-    </div>
-
-      <%= link_to '送信', users_contact_done_path(@contact), method: :patch %>
-  </div>
-
-
-<!-- お問い合わせの確認画面 -->
-
-
-
-<!-- 掲載依頼の確認画面 -->
-<!-- 掲載依頼の確認画面 -->
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <%= f.submit '戻る', name: 'back', mehod: :post, class: "editbtn col-xs-4" %>
+        <%= f.submit '送信', class: "editbtn col-xs-4" %>
+        <div class="col-xs-2"></div>
+      </div>
+    <% end %>
+</div>
