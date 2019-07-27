@@ -1,23 +1,14 @@
 class Users::SidebarsController < ApplicationController
 
-	def show
-		@user = User.find(params[:id])
-	end
-
-	def edit
-		@user = User.find(params[:id])
-	end
-
 	def index
-		@user = current_user
-        @theaterlikes = Theaterlike.where(user_id: @user.id)
+       @theaterlikes = current_user.theaterlikes.order(id: "DESC").limit(3)
+       @reviewlikes = current_user.reviewlikes.order(id: "DESC").limit(2)
 	end
 
     def update
         @user = User.find(params[:id])
         @user.update(user_params)
-        flash[:notice] = "編集されました"
-        redirect_to users_user_path(@user)
+        redirect_to users_sidebar_path(@user)
     end
 
     private

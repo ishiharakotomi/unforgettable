@@ -2,9 +2,6 @@ class Spendlike < ApplicationRecord
 
     belongs_to :review
    	belongs_to :user
+    paginates_per 6
 
-
-	def liked_by?(user)
-        spendlikes.where(user_id: user.id).exists?
-    end
 end

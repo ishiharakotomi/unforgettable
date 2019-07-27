@@ -1,4 +1,6 @@
 class Users::ContactsController < ApplicationController
+    before_action :authenticate_user!
+
     def new
         @contact = Contact.new
         @request = ContactRequest.new
@@ -9,11 +11,14 @@ class Users::ContactsController < ApplicationController
     end
 
     def create
-        contact = Contact.new(contact_params)
-        contact.nickname = current_user.nickname
-        contact.is_confirmed = true
-        contact.save!
-        redirect_to users_contact_confirm_path(contact)
+        @contact = Contact.new(contact_params)
+        @request = ContactRequest.new
+        @contact.nickname = current_user.nickname
+        if @contact.save
+           redirect_to users_contact_confirm_path(@contact)
+        else
+            render 'new'
+  end
     end
 
     def done
@@ -24,6 +29,8 @@ class Users::ContactsController < ApplicationController
         render :action => 'new'
      else
         ContactMailer.send_contact(@contact).deliver_now
+        @contact.is_confirmed = true
+        @contact.save!
         redirect_to root_path
      end
     end

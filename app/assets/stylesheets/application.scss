@@ -13,13 +13,67 @@
  *= require_tree .
  *= require_self
  */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
+.contacttable {
+  margin: 0 auto;
+}
+
+.contacttablewidth {
+  width: 180px;
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body{
+  background-color: #fedc3d;
+}
+
+.logo {
+  height: 150px;
+  width: 250px;
+  line-height: 150px;
+  font-size: 60px;
+  color: navy;
+  font-family: 'Jacques Francois Shadow', cursive;
+}
+
+.heading {
+  height: 35px;
+  font-size: 35px;
+  line-height: 35px;
+  text-align: center;
+  margin-bottom: 50px;
+  color: navy;
+  font-family: 'Rubik', sans-serif;
+}
+
+.heading a {
+  color: navy;
+}
+
+.theatername a {
+  color: navy;
+}
+
+.editdestroy {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.editdestroy a {
+  color: navy;
 }
 
 .wrapper {
@@ -52,7 +106,7 @@ main {
   height: 100%;
   min-height: 100vh;
   padding: 0 50px;
-  background-color: #eee;
+  background-color: #01abaa;
   transition: all .5s;
   display: flex;
   flex-direction: column;
@@ -131,7 +185,7 @@ nav {
   width: 250px;
   height: 100%;
   padding-top: 100px;
-  background-color: rgba(16, 69, 153, 0.8);
+  background-color: #01abaa;
   position: fixed;
   top: 0;
   right: 0;
@@ -158,4 +212,96 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+body{
+  padding:0;
+  margin:0;
+  background:#fedc3d;
+}
+
+.tabs{
+  width:80%;
+  margin:10px auto;
+  position:relative;
+}
+
+.tab-buttons span{
+  font:400 14px 'open sans',sans-serif;
+  color:#51361a;
+  background:#fea680;
+  cursor:pointer;
+  border-bottom:2px solid #fea680;
+  display:block;
+  width:50%;
+  float:left;
+  text-align:center;
+  height:40px;
+  line-height:40px;
+}
+
+.tab-content{
+  border-bottom:3px solid #ddd;
+  padding:15px 0;
+  display:block;
+  font:400 13px 'open sans',sans-serif;
+  color:#51361a;
+}
+
+#lamp{
+  width:50%;
+  height:2px;
+  background:#51361a;
+  display:block;
+  position:absolute;
+  top:40px;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+
+#lamp.content2{
+  left:50%;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+
+#lamp.content1{
+  left:0;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+
+.margin {
+  margin-top: 50px;
+}
+
+.menu-item{
+  font-size: 30px;
+  font-family: 'Rubik', sans-serif;
+  padding-left: 15px;
+  text-decoration: none;
+  color: #602D1D
+;
+}
+
+.menu-item a{
+  color: navy;
+}
+
+.pageng {
+  text-align: center;
+}
+
+.alink {
+  color: navy;
+}
+
+.alink a {
+  color: navy;
 }

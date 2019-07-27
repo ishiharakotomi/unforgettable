@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_16_110722) do
+ActiveRecord::Schema.define(version: 2019_07_23_091452) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -48,17 +48,19 @@ ActiveRecord::Schema.define(version: 2019_07_16_110722) do
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "nickname"
+    t.boolean "is_confirmed", default: false
     t.string "name"
     t.string "name_kana"
-    t.boolean "is_confirmed", default: false
+    t.string "nickname"
   end
 
   create_table "reviewlikes", force: :cascade do |t|
-    t.integer "review_id"
     t.integer "user_id"
+    t.integer "review_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_reviewlikes_on_review_id"
+    t.index ["user_id"], name: "index_reviewlikes_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -70,23 +72,25 @@ ActiveRecord::Schema.define(version: 2019_07_16_110722) do
     t.integer "review_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
   end
 
   create_table "spendlikes", force: :cascade do |t|
-    t.integer "spend_id"
     t.integer "user_id"
+    t.integer "review_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "review_id"
+    t.index ["user_id"], name: "index_spendlikes_on_user_id"
   end
 
   create_table "theaterlikes", force: :cascade do |t|
-    t.integer "theater_id"
     t.integer "user_id"
+    t.integer "theater_id"
+    t.integer "review_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "review_id"
+    t.index ["review_id"], name: "index_theaterlikes_on_review_id"
+    t.index ["theater_id"], name: "index_theaterlikes_on_theater_id"
+    t.index ["user_id"], name: "index_theaterlikes_on_user_id"
   end
 
   create_table "theaters", force: :cascade do |t|
@@ -96,8 +100,6 @@ ActiveRecord::Schema.define(version: 2019_07_16_110722) do
     t.string "address"
     t.string "phonenumber"
     t.string "introduction"
-    t.integer "theater_id"
-    t.integer "user_id"
     t.string "title"
     t.string "body"
     t.text "review_image"
@@ -123,7 +125,10 @@ ActiveRecord::Schema.define(version: 2019_07_16_110722) do
     t.string "profile_image_id"
     t.string "name"
     t.string "name_kana"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.datetime "deleted_at"
+    t.string "self_introduction"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
+    t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

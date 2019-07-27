@@ -1,34 +1,57 @@
+<div class="container">
 
-<p>クリップした劇場</p>
-  <% @user.theaterlikes.each do |f| %>
-    <%= attachment_image_tag f.theater, :theater_image, size: '120x100',fallback: "noimage.jpg" %>
-    <%= f.theater.theater_name %>
-  <% end %>
+  <div class="row theaterclip">
+    <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My theater likes</p>
+    <% @theaterlikes.each do |f| %>
+      <div class="col-xs-4">
+        <%= link_to users_theater_path(f), data: {"turbolinks" => false} do %>
+          <p><%= attachment_image_tag f.theater, :theater_image, fallback: "noimage.jpg", class: "theaterimageclip" %></p>
+          <p> theater name：<%= f.theater.theater_name %></p>
+        <% end %>
+          <p> adress：<%= f.theater.prefecture_name %><%= f.theater.address_city %><%= f.theater.address_street %></p>
+      </div>
+    <% end %>
+  </div>
+    <div class="row col-xs-4 col-xs-offset-4 editdestroy">
+      <%= link_to 'theater likes go!', users_theaterlikes_path %>
+    </div>
+  </div>
 
-  <h2>
-      クリップしたreview
-  </h2>
-  <% @user.reviewlikes.each do |f| %>
-    <p>ニックネーム：<%= f.review.user.nickname %></p>
-    <p>題目：<%= f.review.title %></p>
-    <p>内容：<%= f.review.body %></p>
-  <% end %>
+  <div class="row reviewclip">
+    <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My review likes</p>
+    <% @reviewlikes.each do |f| %>
+      <div class="col-xs-6">
+        <div class="reviewprofileimage col-xs-3">
+          <%= attachment_image_tag current_user, :profile_image, fallback: "profile_noimage.png", size:"120x120"%>
+        </div>
+        <div class="reviewtitlecontent col-xs-9">
+          <p><strong><%= f.review.user.nickname %></strong></p>
+          <p> title：<%= f.review.title %></p>
+          <p> review：<%= f.review.body %></p>
+        </div>
+      </div>
+    <% end %>
+    <div class="row col-xs-4 col-xs-offset-4 editdestroy">
+      <%= link_to 'review likes go!', users_reviewlikes_path %>
+    </div>
+  </div>
 
-  <h2>
-      クリップしたosusume spot/spend
-  </h2>
-  <% @user.spendlikes.each do |f| %>
-    <p>ニックネーム：<%= f.user.nickname %></p>
-    <p>題目：<%= f.review.title %></p>
-    <p>内容：<%= f.review.body %></p>
-  <% end %>
-
-  <h2>
-  <%= @user.nickname + "さんのポスト" %>
-  </h2>
-    <% current_user.reviews.each do |f| %>
-    <p>ニックネーム：<%= f.user.nickname %></p>
-    <p>題目：<%= f.title %></p>
-    <p>user：<%= @user.id %></p>
-    <p>内容：<%= f.body %></p>
-  <% end %>
+  <div class="row spendclip">
+    <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My recommend spot/spend likes</p>
+    <% current_user.spendlikes.each do |f| %>
+      <div class="col-xs-6">
+        <div class="reviewprofileimage col-xs-3">
+          <%= attachment_image_tag current_user, :profile_image, fallback: "profile_noimage.png", size:"120x120"%>
+        </div>
+        <div class="reviewtitlecontent col-xs-9">
+          <p><strong><%= f.user.nickname %></strong></p>
+          <p>title：<%= f.review.title %></p>
+          <p>recommend：<%= f.review.body %></p>
+        </div>
+      </div>
+    <% end %>
+    <div class="row col-xs-4 col-xs-offset-4 editdestroy">
+      <%= link_to 'osusume likes go!', users_spendlikes_path %>
+    </div>
+  </div>
+</div>

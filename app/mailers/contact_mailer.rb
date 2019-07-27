@@ -1,7 +1,5 @@
 class ContactMailer < ApplicationMailer
 
-	default to: ENV['UNFORGETTABLE']
-
   def send_contact(contact)
       @contact = contact
       mail(to: ENV['UNFORGETTABLE'],  subject: "#{@contact.name}様よりメッセージが届きました")

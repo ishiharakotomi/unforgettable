@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row heading">
+	<p class="heading"><%= current_user.nickname %>'s page</p>
+  </div>
+  <div class="row editdestroy">
+	<%= link_to "編集しますか？", edit_users_user_path %>
+  </div>
+
+  <div class="row">
+  	<div class="col-xs-1"></div>
+    <div class="col-xs-5 profileimage">
+      <%= attachment_image_tag @user, :profile_image, fallback: "profile_noimage.png", size:"350x350" %>
+    </div>
+    <div class="col-xs-6 profile">
+      <p> name：<%= current_user.nickname %></p>
+      <p> self introduction：</p>
+      <p><%= current_user.self_introduction %></p>
+    </div>
+  </div>
+</div>
