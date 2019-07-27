@@ -19,7 +19,8 @@
   </div>
 
   <div class="row theaterimage_row">
-    <%= attachment_image_tag @theater, :theater_image, fallback: "noimage.jpg", class: 'theaterimage_show center-block' %>
+    <%= attachment_image_tag @theater, :theater_image, fallback: "/images/noim
+    age.jpg", class: 'theaterimage_show center-block' %>
   </div>
 
   <div class="row editdestroy">
@@ -79,7 +80,7 @@
           <% @review0.each do |review| %>
             <div class="row revieweach">
               <div class="col-xs-4">
-                <%= attachment_image_tag @user, :profile_image, fallback: "profile_noimage.png", size:"120x120"%>
+                <%= attachment_image_tag @user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
               </div>
               <div class="col-xs-8">
                 <p><%= review.user.nickname %></p>
@@ -100,7 +101,7 @@
         <% @review1.each do |spend| %>
           <div class="row revieweach">
             <div class="col-xs-4">
-              <%= attachment_image_tag current_user, :profile_image, fallback: "profile_noimage.png", size:"120x120"%>
+              <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
             </div>
             <div class="col-xs-8">
               <p><%= spend.user.nickname %></p>

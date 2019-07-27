@@ -15,7 +15,7 @@
       <div class="col-xs-4">
         <div class="theaterindex">
           <%= link_to admins_theater_path(t), data: {"turbolinks" => false} do %>
-            <%= attachment_image_tag t, :theater_image, fallback: "noimage.jpg", class: 'theaterimage' %>
+            <%= attachment_image_tag t, :theater_image, fallback: "/images/noimage.jpg", class: 'theaterimage' %>
             <p class="theatername"> 劇場名： <%= t.theater_name %></p>
           <% end %>
           <p class="alink">住所：<%= t.prefecture_name %><%= t.address_city %><%= t.address_street %></p>

@@ -5,7 +5,7 @@
     <% @theaterlikes.each do |f| %>
       <div class="col-xs-4">
         <%= link_to users_theater_path(f), data: {"turbolinks" => false} do %>
-          <p><%= attachment_image_tag f.theater, :theater_image, fallback: "noimage.jpg", class: "theaterimageclip" %></p>
+          <p><%= attachment_image_tag f.theater, :theater_image, fallback: "/images/noimage.jpg", class: "theaterimageclip" %></p>
           <p> theater name：<%= f.theater.theater_name %></p>
         <% end %>
           <p> adress：<%= f.theater.prefecture_name %><%= f.theater.address_city %><%= f.theater.address_street %></p>
@@ -22,7 +22,7 @@
     <% @reviewlikes.each do |f| %>
       <div class="col-xs-6">
         <div class="reviewprofileimage col-xs-3">
-          <%= attachment_image_tag current_user, :profile_image, fallback: "profile_noimage.png", size:"120x120"%>
+          <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
         </div>
         <div class="reviewtitlecontent col-xs-9">
           <p><strong><%= f.review.user.nickname %></strong></p>
@@ -41,7 +41,7 @@
     <% current_user.spendlikes.each do |f| %>
       <div class="col-xs-6">
         <div class="reviewprofileimage col-xs-3">
-          <%= attachment_image_tag current_user, :profile_image, fallback: "profile_noimage.png", size:"120x120"%>
+          <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
         </div>
         <div class="reviewtitlecontent col-xs-9">
           <p><strong><%= f.user.nickname %></strong></p>
