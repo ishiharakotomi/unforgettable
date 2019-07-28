@@ -19,8 +19,7 @@
   </div>
 
   <div class="row theaterimage_row">
-    <%= attachment_image_tag @theater, :theater_image, fallback: "/images/noim
-    age.jpg", class: 'theaterimage_show center-block' %>
+    <%= attachment_image_tag @theater, :theater_image, fallback: "/images/noimage.jpg", class: 'theaterimage_show center-block' %>
   </div>
 
   <div class="row editdestroy">
@@ -50,23 +49,23 @@
     </tr>
   </table>
 
-        <% if user_signed_in? && @theater.liked_by?(current_user) %>
-          <%= link_to users_theater_theaterlike_path(@theater), method: :delete do %>
-            <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
-            <%= @theater.theaterlikes.count %>
-          <% end %>
-        <% else %>
-          <%= link_to users_theater_theaterlikes_path(@theater.id), method: :post do %>
-            <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
-            <%= @theater.theaterlikes.count %>
-          <% end %>
-        <% end %>
+  <% if user_signed_in? && @theater.liked_by?(current_user) %>
+    <%= link_to users_theater_theaterlike_path(@theater), method: :delete do %>
+      <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
+      <%= @theater.theaterlikes.count %>
+    <% end %>
+  <% else %>
+    <%= link_to users_theater_theaterlikes_path(@theater.id), method: :post do %>
+      <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
+      <%= @theater.theaterlikes.count %>
+    <% end %>
+  <% end %>
 
-    <div class="row heading">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-6">review ＆ recommend spot/spend</div>
-      <div class="col-xs-3"></div>
-    </div>
+  <div class="row heading">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6">review ＆ recommend spot/spend</div>
+    <div class="col-xs-3"></div>
+  </div>
 
   <div class='tabs'>
     <div class='tab-buttons'>

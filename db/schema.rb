@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_091452) do
+ActiveRecord::Schema.define(version: 2019_07_21_130347) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -38,20 +38,20 @@ ActiveRecord::Schema.define(version: 2019_07_23_091452) do
     t.string "prefecture_name"
     t.string "responsible"
     t.string "theater_url"
+    t.boolean "is_confirmed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_confirmed", default: false
   end
 
   create_table "contacts", force: :cascade do |t|
     t.string "email"
     t.text "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.boolean "is_confirmed", default: false
     t.string "name"
     t.string "name_kana"
     t.string "nickname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reviewlikes", force: :cascade do |t|
@@ -59,8 +59,6 @@ ActiveRecord::Schema.define(version: 2019_07_23_091452) do
     t.integer "review_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["review_id"], name: "index_reviewlikes_on_review_id"
-    t.index ["user_id"], name: "index_reviewlikes_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -96,7 +94,6 @@ ActiveRecord::Schema.define(version: 2019_07_23_091452) do
   create_table "theaters", force: :cascade do |t|
     t.string "theater_name"
     t.text "theater_image_id"
-    t.string "postalcode"
     t.string "address"
     t.string "phonenumber"
     t.string "introduction"
@@ -104,13 +101,13 @@ ActiveRecord::Schema.define(version: 2019_07_23_091452) do
     t.string "body"
     t.text "review_image"
     t.integer "review_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "postcode"
     t.string "address_city"
     t.string "address_street"
     t.string "address_building"
     t.string "prefecture_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -119,15 +116,14 @@ ActiveRecord::Schema.define(version: 2019_07_23_091452) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "nickname"
     t.string "profile_image_id"
     t.string "name"
     t.string "name_kana"
     t.datetime "deleted_at"
     t.string "self_introduction"
-    t.index ["deleted_at"], name: "index_users_on_deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
