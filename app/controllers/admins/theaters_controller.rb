@@ -8,9 +8,9 @@ before_action :authenticate_admin!, only: [:index, :show, :new, :edit, :update, 
 
     def show
     	@theater = Theater.find(params[:id])
-    	@review0 = @theater.reviews.where(review_type: 0).page(params[:page]).reverse_order
+    	@review0 = @theater.reviews.where(review_type: 0)
         @review = Review.new
-        @review1 = @theater.reviews.where(review_type: 1).page(params[:page]).reverse_order
+        @review1 = @theater.reviews.where(review_type: 1)
         @search = Theater.ransack(params[:q])
         @theaters = @search.result.reverse_order
     end

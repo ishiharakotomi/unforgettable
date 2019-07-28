@@ -2,7 +2,7 @@ class Users::TheaterlikesController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @theaterlikes = current_user.theaterlikes.page(params[:page]).per(9)
+        @theaterlikes = current_user.theaterlikes.order(id: "DESC").page(params[:page]).per(9)
     end
 
     def theaterlikes
