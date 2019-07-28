@@ -2,7 +2,7 @@ class Users::SpendlikesController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @reviewlikes = Review.where(review_type: 1, user_id: current_user).page(params[:page]).per(8)
+        @reviewlikes = current_user.spendlikes.order(id: "DESC").page(params[:page]).per(8)
     end
 
     def create

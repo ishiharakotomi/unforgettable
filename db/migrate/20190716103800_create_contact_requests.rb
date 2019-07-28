@@ -8,12 +8,13 @@ class CreateContactRequests < ActiveRecord::Migration[5.2]
       t.string :name_kana
       t.integer :postcode
       t.string :address_city
-	  t.string :phonenumber
-	  t.string :address_street
-	  t.string :address_building
-	  t.string :prefecture_name
-	  t.string :responsible
-	  t.string :theater_url
+      t.string :phonenumber
+      t.string :address_street
+      t.string :address_building
+      t.string :prefecture_name
+      t.string :responsible
+      t.string :theater_url
+      t.boolean :is_confirmed, default: false
 
       t.timestamps
     end

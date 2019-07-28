@@ -9,6 +9,7 @@
           <p><strong><%= f.user.nickname %></strong></p>
           <p> title：<%= f.review.title %></p>
           <p> review：<%= f.review.body %></p>
+          <%= attachment_image_tag (f.review), :review_image, class: "reviewimage" %>
         </div>
       </div>
     <% end %>

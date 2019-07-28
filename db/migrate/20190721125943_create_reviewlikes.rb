@@ -1,8 +1,8 @@
 class CreateReviewlikes < ActiveRecord::Migration[5.2]
   def change
     create_table :reviewlikes do |t|
-      t.references :user, foreign_key: true
-      t.references :review, foreign_key: true
+      t.integer :user_id
+      t.integer :review_id
 
       t.timestamps
     end

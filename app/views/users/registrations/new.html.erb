@@ -8,17 +8,17 @@
           <%= render "devise/shared/error_messages", resource: resource %>
 
             <div class="field">
-              <%= f.label "full name" %><br />
+              <%= f.label "氏名" %><br />
               <%= f.text_field :name, autocomplete: "full name", class: "col-xs-12" %>
             </div>
 
               <div class="field">
-              <%= f.label "full name（kana）" %><br />
+              <%= f.label "氏名（カナ）" %><br />
               <%= f.text_field :name_kana, autocomplete: "氏名（カナ）", class: "col-xs-12" %>
             </div>
 
             <div class="field">
-              <%= f.label "nickname" %><br />
+              <%= f.label "ニックネーム" %><br />
               <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", class: "col-xs-12" %>
             </div>
 
@@ -44,7 +44,7 @@
               <%= f.submit "sign up！", class: "profileeditform editbtn col-xs-12" %>
             </div>
           <% end %>
-<%= render "users/shared/links" %>
+  <%= render "users/shared/links" %>
 </div>
 </div>
 </div>
