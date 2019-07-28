@@ -1,16 +1,17 @@
 <div class="container">
-
   <div class="row theaterclip">
     <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My theater likes</p>
     <% @theaterlikes.each do |f| %>
-      <div class="col-xs-4">
+      <div class="col-xs-4 theaterindex">
         <%= link_to users_theater_path(f), data: {"turbolinks" => false} do %>
           <p><%= attachment_image_tag f.theater, :theater_image, fallback: "/images/noimage.jpg", class: "theaterimageclip" %></p>
-          <p> 劇場名：<%= f.theater.theater_name %></p>
+          <p class="alink"> 劇場名：<%= f.theater.theater_name %></p>
         <% end %>
-          <p> 住所：<%= f.theater.prefecture_name %><%= f.theater.address_city %><%= f.theater.address_street %></p>
+        <p class="alink"> 住所：<%= f.theater.prefecture_name %><%= f.theater.address_city %><%= f.theater.address_street %></p>
       </div>
     <% end %>
+  </div>
+  <div class="row pageng">
     <%= paginate @theaterlikes, class: "paginate" %>
   </div>
 </div>

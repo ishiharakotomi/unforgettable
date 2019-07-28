@@ -4,18 +4,22 @@
     <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My theater likes</p>
     <% @theaterlikes.each do |f| %>
       <div class="col-xs-4">
-        <%= link_to users_theater_path(f), data: {"turbolinks" => false} do %>
-          <p><%= attachment_image_tag f.theater, :theater_image, fallback: "/images/noimage.jpg", class: "theaterimageclip" %></p>
-          <p> theater name：<%= f.theater.theater_name %></p>
-        <% end %>
-          <p> adress：<%= f.theater.prefecture_name %><%= f.theater.address_city %><%= f.theater.address_street %></p>
+        <div class="theaterindex">
+          <%= link_to users_theater_path(f), data: {"turbolinks" => false} do %>
+            <%= attachment_image_tag f.theater, :theater_image, fallback: "/images/noimage.jpg", class: "theaterimageclip" %>
+            <p class="alink"> 劇場名：<%= f.theater.theater_name %></p>
+          <% end %>
+          <p class="alink"> 住所：<%= f.theater.prefecture_name %><%= f.theater.address_city %><%= f.theater.address_street %></p>
+        </div>
       </div>
     <% end %>
   </div>
-    <div class="row col-xs-4 col-xs-offset-4 editdestroy">
+  <div class="row">
+    <div class="col-xs-12 likesindex">
       <%= link_to 'theater likes go!', users_theaterlikes_path %>
     </div>
   </div>
+
 
   <div class="row reviewclip">
     <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My review likes</p>
@@ -32,14 +36,16 @@
         </div>
       </div>
     <% end %>
-    <div class="row col-xs-4 col-xs-offset-4 editdestroy">
+  </div>
+  <div class="row">
+    <div class="col-xs-12 likesindex">
       <%= link_to 'review likes go!', users_reviewlikes_path %>
     </div>
   </div>
 
   <div class="row spendclip">
     <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My recommend spot/spend likes</p>
-    <% current_user.spendlikes.each do |f| %>
+    <% @spendlikes.each do |f| %>
       <div class="col-xs-6">
         <div class="reviewprofileimage col-xs-3">
           <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
@@ -52,7 +58,9 @@
         </div>
       </div>
     <% end %>
-    <div class="row col-xs-4 col-xs-offset-4 editdestroy">
+  </div>
+  <div class="row">
+    <div class="col-xs-12 likesindex">
       <%= link_to 'recommend likes go!', users_spendlikes_path %>
     </div>
   </div>

@@ -94,7 +94,7 @@
               <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
             </div>
             <div class="col-xs-8">
-              <strong><p><%= review.user.nickname %></p></strong>
+              <p><strong><%= review.user.nickname %></strong></p>
               <p>title：<%= review.title %></p>
               <p>review：<%= review.body %></p>
               <%= attachment_image_tag (review), :review_image, class: "reviewimage" %>
@@ -110,12 +110,11 @@
                 <% end %>
                   <%= review.reviewlikes.count %>
                     <% if user_signed_in? && review.user == current_user %>
-                      <p><%= link_to '削除', users_review_path(review), method: :delete,  data: {confirm: "本当に削除しますか？"} %></p>
+                      <p><%= link_to '削除', users_review_path(review), method: :delete,  data: {confirm: "本当に削除しますか？"}, class: "alink" %></p>
                     <% end %>
             </div>
           </div>
         <% end %>
-        <%= paginate @review0, class: "paginate" %>
       </div>
     </div>
 
@@ -129,7 +128,7 @@
           <p><%= f.text_area :body, size:"60x3",class: 'col-xs-12' %></p>
           <%= f.hidden_field :theater_id, value: params[:id] %>
            <%= f.hidden_field :review_type, value: 1 %>
-          <%= f.submit 'osusume spot/spend', class: "reviewform reviewbtn col-xs-12" %>
+          <%= f.submit 'recommend spot/spend', class: "reviewform reviewbtn col-xs-12" %>
         <% end %>
 
         <% @review1.each do |spend| %>
@@ -138,7 +137,7 @@
               <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
             </div>
             <div class="col-xs-8">
-              <p><%= spend.user.nickname %> さん</p>
+              <p><strong><%= spend.user.nickname %></strong></p>
               <p>title：<%= spend.title %></p>
               <p>recommend：<%= spend.body %></p>
               <%= attachment_image_tag (spend), :review_image, class: "reviewimage" %>
@@ -155,12 +154,11 @@
               <% end %>
                 <%= spend.spendlikes.count %>
                   <% if user_signed_in? && (spend.user == current_user) %>
-                    <p><%= link_to '削除', users_review_path(spend), method: :delete,  data: {confirm: "本当に削除しますか？"} %></p>
+                    <p><%= link_to '削除', users_review_path(spend), method: :delete,  data: {confirm: "本当に削除しますか？"}, class: "alink" %></p>
                   <% end %>
             </div>
           </div>
         <% end %>
-        <%= paginate @review1, class: "paginate" %>
       </div>
     </div>
   </div>

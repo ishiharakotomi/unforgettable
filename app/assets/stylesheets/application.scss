@@ -21,6 +21,11 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
 
+.reviewimage {
+  height: 150px;
+  display: block;
+}
+
 .contacttable {
   margin: 0 auto;
 }
@@ -296,6 +301,10 @@ body{
 
 .pageng {
   text-align: center;
+}
+
+.pageng a {
+  color: grey;
 }
 
 .alink {
