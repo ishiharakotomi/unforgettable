@@ -1,1 +1,2 @@
 class LikesController < ApplicationController
+end
