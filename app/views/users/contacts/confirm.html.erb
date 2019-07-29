@@ -1,43 +1,41 @@
-<div class="container">
-  <div class="row heading">お問い合わせ内容の確認</div>
+<div class="row heading">お問い合わせ内容の確認</div>
 
-    <%= form_for @contact, :url => users_contact_done_path do |f| %>
-      <table class="contacttable">
-        <tr>
-          <td class="contacttablewidth">ニックネーム</td>
-          <td><%= @contact.nickname %></td>
-        </tr>
+  <%= form_for @contact, :url => users_contact_done_path do |f| %>
+    <table class="contacttable">
+      <tr>
+        <td class="contacttablewidth">ニックネーム</td>
+        <td><%= @contact.nickname %></td>
+      </tr>
 
-        <tr>
-          <td class="contacttablewidth">氏名</td>
-          <%= f.hidden_field :name %>
-          <td><%= @contact.name %></td>
-        </tr>
+      <tr>
+        <td class="contacttablewidth">氏名</td>
+        <%= f.hidden_field :name %>
+        <td><%= @contact.name %></td>
+      </tr>
 
-        <tr>
-          <td class="contacttablewidth">氏名（カナ）</td>
-          <%= f.hidden_field :name_kana %>
-          <td><%= @contact.name_kana %></td>
-        </tr>
+      <tr>
+        <td class="contacttablewidth">氏名（カナ）</td>
+        <%= f.hidden_field :name_kana %>
+        <td><%= @contact.name_kana %></td>
+      </tr>
 
-        <tr>
-          <td class="contacttablewidth">メールアドレス</td>
-          <%= f.hidden_field :email %>
-          <td><%= @contact.email %></td>
-        </tr>
+      <tr>
+        <td class="contacttablewidth">メールアドレス</td>
+        <%= f.hidden_field :email %>
+        <td><%= @contact.email %></td>
+      </tr>
 
-        <tr>
-          <td class="contacttablewidth">お問い合わせ内容</td>
-          <%= f.hidden_field :message %>
-          <td><%= simple_format(@contact.message) %></td>
-        </tr>
-      </table>
+      <tr>
+        <td class="contacttablewidth">お問い合わせ内容</td>
+        <%= f.hidden_field :message %>
+        <td><%= simple_format(@contact.message) %></td>
+      </tr>
+    </table>
 
-      <div class="row">
-        <div class="col-xs-2"></div>
-        <%= f.submit '戻る', name: 'back', mehod: :post, class: "editbtn col-xs-4" %>
-        <%= f.submit '送信', class: "editbtn col-xs-4" %>
-        <div class="col-xs-2"></div>
-      </div>
-    <% end %>
-</div>
+    <div class="row">
+      <div class="col-xs-2"></div>
+      <%= f.submit '戻る', name: 'back', mehod: :post, class: "editbtn col-xs-4" %>
+      <%= f.submit '送信', class: "editbtn col-xs-4" %>
+      <div class="col-xs-2"></div>
+    </div>
+  <% end %>

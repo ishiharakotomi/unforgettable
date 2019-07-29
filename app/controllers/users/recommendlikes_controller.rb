@@ -1,4 +1,4 @@
-class Users::SpendlikesController < ApplicationController
+class Users::RecommendlikesController < ApplicationController
     before_action :authenticate_user!
 
     def index
@@ -17,5 +17,5 @@ class Users::SpendlikesController < ApplicationController
     	theater = spendlike.review.theater
         spendlike.destroy
         redirect_to users_theater_path(theater)
-        end
+    end
 end

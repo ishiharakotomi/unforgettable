@@ -1,6 +1,10 @@
-
 class Users::ReviewsController < ApplicationController
 	before_action :authenticate_user!
+
+	def index
+		@theater = Theater.find(params[:theater_id])
+		@review0 = @theater.reviews.where(review_type: 0).page(params[:page]).reverse_order.per(8)
+	end
 
     def reviewlikes
         @user = User.find_by(id: params[:id])

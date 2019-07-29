@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Users::SpendlikesControllerTest < ActionDispatch::IntegrationTest
+class Users::RecommendlikesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

@@ -11,10 +11,27 @@ class Users::ReviewlikesController < ApplicationController
         reviewlikes.save!
         redirect_to users_theater_path(review.theater)
     end
+
     def destroy
     	review = Review.find(params[:review_id])
         reviewlike = current_user.reviewlikes.find_by(review_id: review.id)
         reviewlike.destroy
         redirect_to users_theater_path(review.theater)
+    end
+
+    def create_index
+        review = Review.find(params[:review_id])
+        reviewlikes = current_user.reviewlikes.new(review_id: review.id)
+        reviewlikes.save!
+        redirect_back(fallback_location: root_path)
+        #redirect_to users_theater_reviews_path(review.theater)
+    end
+
+    def destroy_index
+        review = Review.find(params[:review_id])
+        reviewlike = current_user.reviewlikes.find_by(review_id: review.id)
+        reviewlike.destroy
+        redirect_back(fallback_location: root_path)
+        #redirect_to users_theater_reviews_path(review.theater)
     end
 end

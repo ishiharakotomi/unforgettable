@@ -1,5 +1,5 @@
 <div class="row reviewclip">
-  <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My review likes</p>
+  <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My recommend likes</p>
   <% @reviewlikes.each do |f| %>
     <div class="col-xs-6">
       <div class="reviewprofileimage col-xs-3">
@@ -8,7 +8,7 @@
       <div class="reviewtitlecontent col-xs-9">
         <p><strong><%= f.user.nickname %></strong></p>
         <p> title：<%= f.review.title %></p>
-        <p> review：<%= f.review.body %></p>
+        <p> recommend：<%= f.review.body %></p>
         <%= attachment_image_tag (f.review), :review_image, class: "reviewimage" %>
       </div>
     </div>

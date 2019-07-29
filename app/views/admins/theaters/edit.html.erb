@@ -1,11 +1,11 @@
-<div class="container">
-    <% if @theater.errors.any? %>
-      <%= @theater.errors.count %>件のエラーが発生しました
-      <% @theater.errors.full_messages.each do |message| %>
-        <%= message %>
-      <% end %>
+<div class="row">
+  <% if @theater.errors.any? %>
+    <%= @theater.errors.count %>件のエラーが発生しました
+    <% @theater.errors.full_messages.each do |message| %>
+      <%= message %>
     <% end %>
-    <%= render 'layouts/header' %>
+  <% end %>
+  <%= render 'layouts/header' %>
   <div class="row heading">Editing theater</div>
     <div class="row col-md-4 col-md-offset-4">
       <%= form_for [:admins, @theater] do |f| %>
