@@ -1,168 +1,178 @@
-<div class="container">
-  <% if @review.errors.any? %>
-    <%= @review.errors.count %>件のエラーが発生しました
-    <% @review.errors.full_messages.each do |message| %>
-      <%= message %>
-    <% end %>
+<% if @review.errors.any? %>
+  <%= @review.errors.count %>件のエラーが発生しました
+  <% @review.errors.full_messages.each do |message| %>
+    <%= message %>
   <% end %>
-  <%= render 'layouts/header' %>
-  <div class="row searchheight">
-    <div class="col-xs-8"></div>
-    <div class="col-xs-4">
-      <%= search_form_for @search, url: root_path, html: {id:"form4"} do |f| %>
-        <%= f.search_field :prefecture_name_or_theater_name_cont, id: "sbox4", placeholder:"劇場名/都道府県" %>
-        <%= button_tag id: "sbtn4", type: "submit" do %>
-          <i class="fas fa-search"></i>
-        <% end %>
+<% end %>
+<%= render 'layouts/header' %>
+<div class="row searchheight">
+  <div class="col-xs-8"></div>
+  <div class="col-xs-4">
+    <%= search_form_for @search, url: root_path, html: {id:"form4"} do |f| %>
+      <%= f.search_field :prefecture_name_or_theater_name_cont, id: "sbox4", placeholder:"劇場名/都道府県" %>
+      <%= button_tag id: "sbtn4", type: "submit" do %>
+        <i class="fas fa-search"></i>
       <% end %>
-    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row heading">
+  <div>Theater Details</div>
+</div>
+
+<div class="row theaterimage_row">
+  <%= attachment_image_tag @theater, :theater_image, fallback: "/images/noimage.jpg", class: 'theaterimage_show center-block' %>
+</div>
+
+<table>
+  <tr>
+    <td class="contacttablewidth">劇場名</td>
+    <td><%= @theater.theater_name %></td>
+  </tr>
+
+  <tr>
+    <td class="contacttablewidth">劇場紹介</td>
+    <td><%= @theater.introduction %></td>
+  </tr>
+
+  <tr>
+    <td class="contacttablewidth">住所</td>
+    <td>〒<%= @theater.postcode %><%= @theater.prefecture_name %><%= @theater.address_city %><%= @theater.address_street %><%= @theater.address_building %></td>
+  </tr>
+
+  <tr>
+    <td class="contacttablewidth">電話番号</td>
+    <td><%= @theater.phonenumber %></td>
+  </tr>
+</table>
+
+<% if user_signed_in? && @theater.liked_by?(current_user) %>
+  <%= link_to users_theater_theaterlike_path(@theater), method: :delete do %>
+    <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
+    <%= @theater.theaterlikes.count %>
+  <% end %>
+<% else %>
+  <%= link_to users_theater_theaterlikes_path(@theater.id), method: :post do %>
+    <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
+    <%= @theater.theaterlikes.count %>
+  <% end %>
+<% end %>
+
+
+<div class="row heading">
+  <div class="col-xs-3"></div>
+  <div class="col-xs-6">review ＆ recommend spot/spend</div>
+  <div class="col-xs-3"></div>
+</div>
+
+<div class='tabs'>
+  <div class='tab-buttons'>
+    <span class='content1'>review</span>
+    <span class='content2'>recommend</span>
+    <div id='lamp' class='content1'></div>
   </div>
 
-  <div class="row heading">
-    <div>Theater Details</div>
-  </div>
+<div class="row tab-content">
+  <div class='content1 col-xs-6 col-xs-offset-3'>
+    <div class="row review">
+      <%= form_for [@theater, @review], url:{controller:'reviews', action:'create'} do |f| %>
+        <%= f.attachment_field :review_image, class: "reviewform" %>
+        <p class="reviewform">title</p>
+        <p><%= f.text_area :title, size:"60x1", class: 'col-xs-12' %></p>
+        <p class="reviewform">review</p>
+        <p><%= f.text_area :body, size:"60x3", class: 'col-xs-12' %></p>
+        <%= f.hidden_field :theater_id, value: @theater.id %>
+        <%= f.hidden_field :review_type, value: 0 %>
+        <%= f.submit 'review', class: "reviewform reviewbtn col-xs-12" %>
+      <% end %>
 
-  <div class="row theaterimage_row">
-    <%= attachment_image_tag @theater, :theater_image, fallback: "/images/noimage.jpg", class: 'theaterimage_show center-block' %>
-  </div>
-
-  <table>
-    <tr>
-      <td class="contacttablewidth">劇場名</td>
-      <td><%= @theater.theater_name %></td>
-    </tr>
-
-    <tr>
-      <td class="contacttablewidth">劇場紹介</td>
-      <td><%= @theater.introduction %></td>
-    </tr>
-
-    <tr>
-      <td class="contacttablewidth">住所</td>
-      <td>〒<%= @theater.postcode %><%= @theater.prefecture_name %><%= @theater.address_city %><%= @theater.address_street %><%= @theater.address_building %></td>
-    </tr>
-
-    <tr>
-      <td class="contacttablewidth">電話番号</td>
-      <td><%= @theater.phonenumber %></td>
-    </tr>
-  </table>
-
-        <% if user_signed_in? && @theater.liked_by?(current_user) %>
-          <%= link_to users_theater_theaterlike_path(@theater), method: :delete do %>
-            <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
-            <%= @theater.theaterlikes.count %>
-          <% end %>
-        <% else %>
-          <%= link_to users_theater_theaterlikes_path(@theater.id), method: :post do %>
-            <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
-            <%= @theater.theaterlikes.count %>
-          <% end %>
-        <% end %>
-
-
-  <div class="row heading">
-    <div class="col-xs-3"></div>
-    <div class="col-xs-6">review ＆ recommend spot/spend</div>
-    <div class="col-xs-3"></div>
-  </div>
-
-  <div class='tabs'>
-    <div class='tab-buttons'>
-      <span class='content1'>review</span>
-      <span class='content2'>recommend</span>
-      <div id='lamp' class='content1'></div>
-    </div>
-
-  <div class="row tab-content">
-    <div class='content1 col-xs-6 col-xs-offset-3'>
-      <div class="row review">
-        <%= form_for [@theater, @review], url:{controller:'reviews', action:'create'} do |f| %>
-          <%= f.attachment_field :review_image, class: "reviewform" %>
-          <p class="reviewform">title</p>
-          <p><%= f.text_area :title, size:"60x1", class: 'col-xs-12' %></p>
-          <p class="reviewform">review</p>
-          <p><%= f.text_area :body, size:"60x3", class: 'col-xs-12' %></p>
-          <%= f.hidden_field :theater_id, value: @theater.id %>
-          <%= f.hidden_field :review_type, value: 0 %>
-          <%= f.submit 'review', class: "reviewform reviewbtn col-xs-12" %>
-        <% end %>
-
-        <% @review0.each do |review| %>
-          <div class="row revieweach">
-            <div class="col-xs-4">
-              <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
-            </div>
-            <div class="col-xs-8">
-              <p><strong><%= review.user.nickname %></strong></p>
-              <p>title：<%= review.title %></p>
-              <p>review：<%= review.body %></p>
-              <%= attachment_image_tag (review), :review_image, class: "reviewimage" %>
-
-                <% if user_signed_in? && review.review_liked_by?(current_user) %>
-                  <%= link_to users_review_reviewlike_path(review), method: :delete do %>
-                  <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
-                <% end %>
-                <% else %>
-                  <%= link_to users_review_reviewlikes_path(review), method: :post do %>
-                    <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
-                  <% end %>
-                <% end %>
-                  <%= review.reviewlikes.count %>
-                    <% if user_signed_in? && review.user == current_user %>
-                      <p><%= link_to '削除', users_review_path(review), method: :delete,  data: {confirm: "本当に削除しますか？"}, class: "alink" %></p>
-                    <% end %>
-            </div>
+      <% @review0.each do |review| %>
+        <div class="row revieweach">
+          <div class="col-xs-4">
+            <%= attachment_image_tag @user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
           </div>
-        <% end %>
-      </div>
-    </div>
+          <div class="col-xs-8">
+            <p><strong><%= review.user.nickname %></strong></p>
+            <p>title：<%= review.title %></p>
+            <p>review：<%= review.body %></p>
+            <%= attachment_image_tag (review), :review_image, class: "reviewimage" %>
 
-    <div class="content2 col-xs-6 col-xs-offset-3">
-      <div class="row review">
-        <%= form_for [@theater, @review], url:{controller:'reviews', action:'create'} do |f| %>
-          <%= f.attachment_field :review_image, class: "reviewform" %>
-          <p class="reviewform">title</p>
-          <p><%= f.text_area :title, size:"60x1",class: 'col-xs-12' %></p>
-          <p class="reviewform">recommend</p>
-          <p><%= f.text_area :body, size:"60x3",class: 'col-xs-12' %></p>
-          <%= f.hidden_field :theater_id, value: params[:id] %>
-           <%= f.hidden_field :review_type, value: 1 %>
-          <%= f.submit 'recommend spot/spend', class: "reviewform reviewbtn col-xs-12" %>
-        <% end %>
-
-        <% @review1.each do |spend| %>
-          <div class="row revieweach">
-            <div class="col-xs-4">
-              <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
-            </div>
-            <div class="col-xs-8">
-              <p><strong><%= spend.user.nickname %></strong></p>
-              <p>title：<%= spend.title %></p>
-              <p>recommend：<%= spend.body %></p>
-              <%= attachment_image_tag (spend), :review_image, class: "reviewimage" %>
-
-              <% if user_signed_in? && spend.spend_liked_by?(current_user) %>
-                <% spendlike=spend.spendlikes.find_by(user_id: current_user.id) %>
-                  <%= link_to users_review_spendlike_path(spend.id, spendlike.id), method: :delete do %>
-                    <i class="fa fa-heart" aria-hidden="true" style="color: red; "></i>
-                <% end %>
+              <% if user_signed_in? && review.review_liked_by?(current_user) %>
+                <%= link_to users_review_reviewlike_path(review), method: :delete do %>
+                <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
+              <% end %>
               <% else %>
-                <%= link_to users_review_spendlikes_path(spend.id), method: :post do %>
+                <%= link_to users_review_reviewlike_path(review), method: :post do %>
                   <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
                 <% end %>
               <% end %>
-                <%= spend.spendlikes.count %>
-                  <% if user_signed_in? && (spend.user == current_user) %>
-                    <p><%= link_to '削除', users_review_path(spend), method: :delete,  data: {confirm: "本当に削除しますか？"}, class: "alink" %></p>
-                  <% end %>
-            </div>
+              <%= review.reviewlikes.count %>
+              <% if user_signed_in? && review.user == current_user %>
+                <p><%= link_to '削除', users_review_path(review), method: :delete,  data: {confirm: "本当に削除しますか？"}, class: "alink" %></p>
+              <% end %>
           </div>
-        <% end %>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="col-xs-12 likesindex">
+          <%= link_to 'all reviews go!', users_theater_reviews_path(@theater) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content2 col-xs-6 col-xs-offset-3">
+    <div class="row review">
+      <%= form_for [@theater, @review], url:{controller:'reviews', action:'create'} do |f| %>
+        <%= f.attachment_field :review_image, class: "reviewform" %>
+        <p class="reviewform">title</p>
+        <p><%= f.text_area :title, size:"60x1",class: 'col-xs-12' %></p>
+        <p class="reviewform">recommend</p>
+        <p><%= f.text_area :body, size:"60x3",class: 'col-xs-12' %></p>
+        <%= f.hidden_field :theater_id, value: params[:id] %>
+         <%= f.hidden_field :review_type, value: 1 %>
+        <%= f.submit 'recommend spot/spend', class: "reviewform reviewbtn col-xs-12" %>
+      <% end %>
+
+      <% @review1.each do |recommend| %>
+        <div class="row revieweach">
+          <div class="col-xs-4">
+            <%= attachment_image_tag @user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
+          </div>
+          <div class="col-xs-8">
+            <p><strong><%= recommend.user.nickname %></strong></p>
+            <p>title：<%= recommend.title %></p>
+            <p>recommend：<%= recommend.body %></p>
+            <%= attachment_image_tag (recommend), :review_image, class: "reviewimage" %>
+
+            <% if user_signed_in? && recommend.spend_liked_by?(current_user) %>
+            <% spendlike = recommend.spendlikes.find_by(user_id: current_user.id) %>
+                <%= link_to users_recommendlike_path(recommend,:id => spendlike.id), method: :delete do %>
+                  <i class="fa fa-heart" aria-hidden="true" style="color: red; "></i>
+              <% end %>
+
+            <% else %>
+              <%= link_to users_recommendlikes_path(:review_id => recommend.id), method: :post do %>
+                <i class="fas fa-heart" aria-hidden="true" style="color: grey;" ></i>
+              <% end %>
+            <% end %>
+              <%= recommend.spendlikes.count %>
+                <% if user_signed_in? && (recommend.user == current_user) %>
+                  <p><%= link_to '削除', users_review_path(recommend), method: :delete,  data: {confirm: "本当に削除しますか？"}, class: "alink" %></p>
+                <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="col-xs-12 likesindex">
+          <%= link_to 'all recommends go!', users_theater_recommends_path(@theater) %>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <script>
 $('.tab-content>div').hide();

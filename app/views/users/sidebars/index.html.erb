@@ -1,67 +1,64 @@
-<div class="container">
-
-  <div class="row theaterclip">
-    <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My theater likes</p>
-    <% @theaterlikes.each do |f| %>
-      <div class="col-xs-4">
-        <div class="theaterindex">
-          <%= link_to users_theater_path(f), data: {"turbolinks" => false} do %>
-            <%= attachment_image_tag f.theater, :theater_image, fallback: "/images/noimage.jpg", class: "theaterimageclip" %>
-            <p class="alink"> 劇場名：<%= f.theater.theater_name %></p>
-          <% end %>
-          <p class="alink"> 住所：<%= f.theater.prefecture_name %><%= f.theater.address_city %><%= f.theater.address_street %></p>
-        </div>
+<div class="row theaterclip">
+  <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My theater likes</p>
+  <% @theaterlikes.each do |f| %>
+    <div class="col-xs-4">
+      <div class="theaterindex">
+        <%= link_to users_theater_path(f.theater_id), data: {"turbolinks" => false} do %>
+          <%= attachment_image_tag f.theater, :theater_image, fallback: "/images/noimage.jpg", class: "theaterimageclip" %>
+          <p class="alink"> 劇場名：<%= f.theater.theater_name %></p>
+        <% end %>
+        <p class="alink"> 住所：<%= f.theater.prefecture_name %><%= f.theater.address_city %><%= f.theater.address_street %></p>
       </div>
-    <% end %>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 likesindex">
-      <%= link_to 'theater likes go!', users_theaterlikes_path %>
     </div>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col-xs-12 likesindex">
+    <%= link_to 'theater likes go!', users_theaterlikes_path %>
   </div>
+</div>
 
 
-  <div class="row reviewclip">
-    <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My review likes</p>
-    <% @reviewlikes.each do |f| %>
-      <div class="col-xs-6">
-        <div class="reviewprofileimage col-xs-3">
-          <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
-        </div>
-        <div class="reviewtitlecontent col-xs-9">
-          <p><strong><%= f.review.user.nickname %></strong></p>
-          <p> title：<%= f.review.title %></p>
-          <p> review：<%= f.review.body %></p>
-          <%= attachment_image_tag (f.review), :review_image, class: "reviewimage" %>
-        </div>
+<div class="row reviewclip">
+  <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My review likes</p>
+  <% @reviewlikes.each do |f| %>
+    <div class="col-xs-6">
+      <div class="reviewprofileimage col-xs-3">
+        <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
       </div>
-    <% end %>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 likesindex">
-      <%= link_to 'review likes go!', users_reviewlikes_path %>
-    </div>
-  </div>
-
-  <div class="row spendclip">
-    <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My recommend spot/spend likes</p>
-    <% @spendlikes.each do |f| %>
-      <div class="col-xs-6">
-        <div class="reviewprofileimage col-xs-3">
-          <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
-        </div>
-        <div class="reviewtitlecontent col-xs-9">
-          <p><strong><%= f.user.nickname %></strong></p>
-          <p>title：<%= f.review.title %></p>
-          <p>recommend：<%= f.review.body %></p>
-          <%= attachment_image_tag (f.review), :review_image, class: "reviewimage" %>
-        </div>
+      <div class="reviewtitlecontent col-xs-9">
+        <p><strong><%= f.review.user.nickname %></strong></p>
+        <p> title：<%= f.review.title %></p>
+        <p> review：<%= f.review.body %></p>
+        <%= attachment_image_tag (f.review), :review_image, class: "reviewimage" %>
       </div>
-    <% end %>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 likesindex">
-      <%= link_to 'recommend likes go!', users_spendlikes_path %>
     </div>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col-xs-12 likesindex">
+    <%= link_to 'review likes go!', users_reviewlikes_path %>
+  </div>
+</div>
+
+<div class="row spendclip">
+  <p class="heading"><i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>My recommend spot/spend likes</p>
+  <% @spendlikes.each do |f| %>
+    <div class="col-xs-6">
+      <div class="reviewprofileimage col-xs-3">
+        <%= attachment_image_tag current_user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
+      </div>
+      <div class="reviewtitlecontent col-xs-9">
+        <p><strong><%= f.user.nickname %></strong></p>
+        <p>title：<%= f.review.title %></p>
+        <p>recommend：<%= f.review.body %></p>
+        <%= attachment_image_tag (f.review), :review_image, class: "reviewimage" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col-xs-12 likesindex">
+    <%= link_to 'recommend likes go!', users_recommendlikes_path %>
   </div>
 </div>
