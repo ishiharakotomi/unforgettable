@@ -17,14 +17,14 @@ class Users::UsersController < ApplicationController
         if params[:user][:password].present?
             user_params_hash[:password] = params[:user][:password]
             if @user.update(user_params_hash)
-                flash[:notice] = "編集されました"
+                flash[:notice] = "編集しました"
                 redirect_to root_path
             else
                 render :edit
             end
         else
             if @user.update(user_params_hash)
-                flash[:notice] = "編集されました"
+                flash[:notice] = "編集しました"
                 redirect_to users_user_path
             else
                 render :edit

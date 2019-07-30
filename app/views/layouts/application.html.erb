@@ -14,50 +14,49 @@
   <%= javascript_include_tag 'application' %>
   <script type="text/javascript" src="//jpostal-1006.appspot.com/jquery.jpostal.js"></script>
 </head>
+
 <body>
 <div class="backgroundcolor">
-
-
   <div class="container">
+
     <%= link_to root_path do %>
-    <div class="row logo">unforgettable</div>
+      <div class="row logo">unforgettable</div>
     <% end %>
 
-      <% if flash[:notice] %>
-        <div class="flash">
-          <%= flash[:notice] %>
-        </div>
-      <% end %>
-
-  <div class="wrapper">
-    <div class="menu-trigger" href="">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <nav>
-      <div class="menu">
-          <% if admin_signed_in? %>
-            <div class="menu-item"><%= link_to "- new theatre", new_admins_theater_path, data: {"turbolinks" => false} %></div>
-            <div class="menu-item"><%= link_to "- all theaters", admins_theaters_path, data: {"turbolinks" => false} %></div>
-            <div class="menu-item"><%= link_to "- log out", destroy_admin_session_path, method: :delete %></div>
-
-          <% elsif user_signed_in? %>
-            <div class="menu-item"><%= current_user.nickname %>,<br>welcom！</div>
-            <div class="menu-item"><%= link_to "- all theaters", root_path, data: {"turbolinks" => false} %></div>
-            <div class="menu-item"><%= link_to "- my page", users_user_path(current_user), data: {"turbolinks" => false} %></div>
-            <div class="menu-item"><%= link_to "- my likes", users_sidebars_path, data: {"turbolinks" => false} %></div>
-            <div class="menu-item"><%= link_to "- contact", new_users_contact_path, data: {"turbolinks" => false} %></div>
-            <div class="menu-item"><%= link_to "- log out", destroy_admin_session_path, method: :delete %></div>
-
-          <% else %>
-            <div class="menu-item"><%= link_to "- about", users_about_path, class: "text-warning" %></div>
-          <% end %>
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
       </div>
-    </nav>
-<!--     <div class="overlay"></div>
- -->    </div>
-              <%= yield %>
+    <% end %>
+
+    <div class="wrapper">
+      <div class="menu-trigger" href="">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <div class="menu">
+            <% if admin_signed_in? %>
+              <div class="menu-item"><%= link_to "- New theatre", new_admins_theater_path, data: {"turbolinks" => false} %></div>
+              <div class="menu-item"><%= link_to "- All theaters", admins_theaters_path, data: {"turbolinks" => false} %></div>
+              <div class="menu-item"><%= link_to "- Log out", destroy_admin_session_path, method: :delete %></div>
+
+            <% elsif user_signed_in? %>
+              <div class="menu-item"><%= current_user.nickname %>,<br>Welcom！</div>
+              <div class="menu-item"><%= link_to "- All theaters", root_path, data: {"turbolinks" => false} %></div>
+              <div class="menu-item"><%= link_to "- My page", users_user_path(current_user), data: {"turbolinks" => false} %></div>
+              <div class="menu-item"><%= link_to "- My likes", users_sidebars_path, data: {"turbolinks" => false} %></div>
+              <div class="menu-item"><%= link_to "- Contact", new_users_contact_path, data: {"turbolinks" => false} %></div>
+              <div class="menu-item"><%= link_to "- Log out", destroy_admin_session_path, method: :delete %></div>
+
+            <% else %>
+              <div class="menu-item"><%= link_to "- About", users_about_path, class: "text-warning" %></div>
+            <% end %>
+        </div>
+      </nav>
+    </div>
+            <%= yield %>
   </div>
 </div>
 

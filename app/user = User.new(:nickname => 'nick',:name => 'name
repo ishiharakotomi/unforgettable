@@ -1,0 +1,2 @@
+user = User.new(:nickname => 'nick',:name => 'names',:name_kana => 'kanakana', :email => 'hogehoge@hoge.com', :password => 'hugahuga')
+user.save!
