@@ -47,6 +47,11 @@
       <td class="contacttablewidth">電話番号</td>
       <td><%= @theater.phonenumber %></td>
     </tr>
+
+    <tr>
+      <td class="contacttablewidth">URL</td>
+      <td><%= @theater.theater_url %></td>
+    </tr>
   </table>
 
   <% if user_signed_in? && @theater.liked_by?(current_user) %>
@@ -63,7 +68,7 @@
 
   <div class="row heading">
     <div class="col-xs-3"></div>
-    <div class="col-xs-6">review ＆ recommend spot/spend</div>
+    <div class="col-xs-6">Review ＆ Recommend spot/spend</div>
     <div class="col-xs-3"></div>
   </div>
 
@@ -79,7 +84,7 @@
           <% @review0.each do |review| %>
             <div class="row revieweach">
               <div class="col-xs-4">
-                <%= attachment_image_tag @user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
+                <%= attachment_image_tag review.user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
               </div>
               <div class="col-xs-8">
                 <p><strong><%= review.user.nickname %></strong></p>
@@ -96,19 +101,19 @@
 
     <div class="content2 col-xs-6 col-xs-offset-3">
       <div class="row review">
-        <% @review1.each do |spend| %>
+        <% @review1.each do |recommend| %>
           <div class="row revieweach">
             <div class="col-xs-4">
-              <%= attachment_image_tag @user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
+              <%= attachment_image_tag recommend.user, :profile_image, fallback: "/images/profile_noimage.png", size:"120x120"%>
             </div>
             <div class="col-xs-8">
-              <p><strong><%= spend.user.nickname %></strong></p>
-              <p> title：<%= spend.title %></p>
-              <p> recommend：<%= spend.body %></p>
-              <%= attachment_image_tag spend, :review_image, class: "reviewimage" %>
+              <p><strong><%= recommend.user.nickname %></strong></p>
+              <p> title：<%= recommend.title %></p>
+              <p> recommend：<%= recommend.body %></p>
+              <%= attachment_image_tag recommend, :review_image, class: "reviewimage" %>
               <i class="fa fa-heart" aria-hidden="true" style="color: red;" ></i>
-              <%= spend.reviewlikes.count %>
-              <p class="alink"><%= link_to '削除', admins_review_path(spend), method: :delete,  data: {confirm: "本当に削除しますか？"} %></p>
+              <%= recommend.reviewlikes.count %>
+              <p class="alink"><%= link_to '削除', admins_review_path(recommend), method: :delete,  data: {confirm: "本当に削除しますか？"} %></p>
             </div>
           </div>
         <% end %>

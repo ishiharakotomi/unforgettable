@@ -16,7 +16,7 @@ class Users::ReviewsController < ApplicationController
 		@review.user_id = current_user.id
 		@review.theater_id = params[:review][:theater_id]
 	 if	@review.save
-	 	flash[:notice] = "投稿されました"
+	 	flash[:notice] = "投稿しました"
 		redirect_to users_theater_path(@review.theater_id)
 	 else
 	 	@search = Theater.ransack(params[:q])

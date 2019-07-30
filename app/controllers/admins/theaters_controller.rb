@@ -28,7 +28,7 @@ before_action :authenticate_admin!, only: [:index, :show, :new, :edit, :update, 
 		@theater = Theater.find(params[:id])
 		@theater.update(theater_params)
 		if @theater.save
-			flash[:notice] = "編集されました"
+			flash[:notice] = "編集しました"
 			redirect_to admins_theaters_path(@theater)
 		else
 			render 'edit'
@@ -38,7 +38,7 @@ before_action :authenticate_admin!, only: [:index, :show, :new, :edit, :update, 
 	def create
 		@theater = Theater.new(theater_params)
 		if @theater.save
-			flash[:notice] = "投稿されました"
+			flash[:notice] = "投稿しました"
 			redirect_to admins_theaters_path
 		else
 			render 'new'
@@ -53,6 +53,6 @@ before_action :authenticate_admin!, only: [:index, :show, :new, :edit, :update, 
 
 	private
 	def theater_params
-		params.require(:theater).permit(:theater_image, :theater_name, :introduction, :postcode, :prefecture_name, :prefecture_code, :address_city, :address_street, :address_building, :phonenumber)
+		params.require(:theater).permit(:theater_image, :theater_name, :introduction, :postcode, :prefecture_name, :prefecture_code, :address_city, :address_street, :address_building, :phonenumber, :theater_url)
 	end
 end

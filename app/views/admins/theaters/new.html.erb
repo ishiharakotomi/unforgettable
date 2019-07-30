@@ -5,7 +5,7 @@
         <%= message %>
       <% end %>
     <% end %>
-  <div class="row heading">New heater</div>
+  <div class="row heading">New Theater</div>
     <div class="row col-md-4 col-md-offset-4">
       <%= form_for [:admins, @theater] do |f| %>
 
@@ -29,6 +29,9 @@
 
         <p class="profileedit">電話番号</p>
         <%= f.text_field :phonenumber, class: "col-xs-12" %> <br>
+
+        <p class="profileedit">URL</p>
+        <%= f.text_field :theater_url, class: "col-xs-12" %> <br>
 
         <%= f.submit 'new！', class: "profileeditform editbtn" %>
       <% end %>
