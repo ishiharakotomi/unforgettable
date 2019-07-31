@@ -12,7 +12,6 @@ class Users::TheatersController < ApplicationController
         @review1 = @theater.reviews.where(review_type: 1).order(id: "DESC").limit(10)
         @search = Theater.ransack(params[:q])
         @theaters = @search.result.reverse_order
-        @user = Review.find(params[:id]).user
 	end
 
     def about

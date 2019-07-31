@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_30_052519) do
+ActiveRecord::Schema.define(version: 2019_07_31_070015) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2019_07_30_052519) do
     t.text "theater_image_id"
     t.string "address"
     t.string "phonenumber"
-    t.string "introduction"
+    t.text "introduction"
     t.string "title"
     t.string "body"
     t.text "review_image"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 2019_07_30_052519) do
     t.string "name"
     t.string "name_kana"
     t.datetime "deleted_at"
-    t.string "self_introduction"
+    t.text "self_introduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email"
