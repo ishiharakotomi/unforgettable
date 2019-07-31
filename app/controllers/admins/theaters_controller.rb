@@ -13,7 +13,6 @@ before_action :authenticate_admin!, only: [:index, :show, :new, :edit, :update, 
         @review1 = @theater.reviews.where(review_type: 1)
         @search = Theater.ransack(params[:q])
         @theaters = @search.result.reverse_order
-        @user = Review.find(params[:id]).user
     end
 
 	def new
